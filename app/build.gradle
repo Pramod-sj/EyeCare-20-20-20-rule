@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -90,4 +91,12 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.5.5"
 
     implementation 'com.airbnb.android:lottie:6.0.0'
+
+    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-config-ktx'
+
+
+    implementation "androidx.core:core-splashscreen:1.0.0"
 }

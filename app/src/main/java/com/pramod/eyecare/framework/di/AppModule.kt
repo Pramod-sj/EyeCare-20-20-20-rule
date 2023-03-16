@@ -8,6 +8,7 @@ import android.os.Vibrator
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.gson.Gson
 import com.pramod.eyecare.framework.appDataStore
 import dagger.Module
@@ -47,5 +48,10 @@ class AppModule {
     @Provides
     fun provideLocalBroadcastManager(@ApplicationContext context: Context): LocalBroadcastManager {
         return LocalBroadcastManager.getInstance(context)
+    }
+
+    @Provides
+    fun provideFirebaseRemoteConfig(): FirebaseRemoteConfig {
+        return FirebaseRemoteConfig.getInstance()
     }
 }

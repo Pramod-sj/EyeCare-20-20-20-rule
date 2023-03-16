@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "753734573265",
+    "project_id": "eyecare---20-20-20-rule",
+    "storage_bucket": "eyecare---20-20-20-rule.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753734573265:android:82e4887b25689157fef9f0",
+        "android_client_info": {
+          "package_name": "com.pramod.eyecare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753734573265-bhgshgbdpiipcj8mcpnkhouna28h1krc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4osbb8np7_bIz8SBYTLfTGh6gwwZcOy4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "753734573265-bhgshgbdpiipcj8mcpnkhouna28h1krc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defaults>
+  <entry>
+    <key>eye_care_tips</key>
+    <value>["Blink often to refresh your eyes.","Check the lighting and reduce glare.","Adjust your monitor","Take eye breaks."]</value>
+  </entry>
+</defaults>

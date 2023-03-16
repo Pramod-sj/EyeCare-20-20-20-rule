@@ -61,9 +61,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         bindServiceActiveState()
         handleStartStopFabClick()
         bindTimerData()
+        bindGazeProgressIndication()
+        bindTips()
+    }
+
+    private fun bindGazeProgressIndication() {
         viewModel.gazePercentage.observe(viewLifecycleOwner) { progress ->
-            Timber.i("onViewCreated: " + progress)
             binding.progressGazePercentage.setProgressCompat(progress, true)
+        }
+    }
+
+    private fun bindTips() {
+        viewModel.tip.observe(viewLifecycleOwner) {
+            binding.tvTips.text = it
         }
     }
 
