@@ -1,6 +1,9 @@
 package com.pramod.eyecare.framework.helper
 
-import android.app.*
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -138,7 +141,8 @@ class NotificationHelper @Inject constructor(
             context, notificationChannel.id
         ).setContentTitle(title)//"EyeCare service is running")
             .setContentText(desc)//"Please don't remove this notification its improtant for correct functioning!")
-            .setSmallIcon(R.drawable.ic_launcher_foreground).setContentIntent(pendingIntent).apply {
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentIntent(pendingIntent).apply {
                 priority = when (notificationChannel) {
                     NotificationChannel.DEFAULT -> PRIORITY_DEFAULT
                     NotificationChannel.SERVICE_RUNNING -> PRIORITY_LOW
