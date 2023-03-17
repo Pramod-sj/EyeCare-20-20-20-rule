@@ -12,7 +12,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.pramod.eyecare.business.PersistentAlarmScheduler
 import com.pramod.eyecare.business.PersistentAlarmScheduler.Companion.ACTION_ON_ALARM_RECEIVE
 import com.pramod.eyecare.business.ScheduledAlarmCache
-import com.pramod.eyecare.framework.service.NotificationForegroundService
+import com.pramod.eyecare.framework.service.EyeCarePersistentForegroundService.Companion.ACTION_GAZE_TIMER_COMPLETED
 import com.pramod.eyecare.framework.ui.utils.MyObserver
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ServiceScoped
@@ -42,7 +42,7 @@ class PersistentAlarmSchedulerImpl @Inject constructor(
     //region broadcast receiver for 20 sec timer started when notification is shown
     private val gazeTimerBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(p0: Context?, p1: Intent?) {
-            if (p1?.action == NotificationForegroundService.ACTION_GAZE_TIMER_COMPLETED) {
+            if (p1?.action == ACTION_GAZE_TIMER_COMPLETED) {
                 coroutineScope.launch {
                     scheduledAlarmCache.getScheduledAlarmData().firstOrNull()?.let { alarmData ->
                         if (alarmData.repeat) {
@@ -63,13 +63,13 @@ class PersistentAlarmSchedulerImpl @Inject constructor(
     private val alarmBroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(p0: Context?, p1: Intent?) {
             if (p1?.action == ACTION_ON_ALARM_RECEIVE) {
-                listeners.forEach { it.onAlarmReceived() }
                 coroutineScope.launch {
                     withContext(Dispatchers.IO) {
                         scheduledAlarmCache.getScheduledAlarmData().firstOrNull()
                             ?.let { alarmData ->
                                 scheduledAlarmCache.setAlarmData(alarmData.copy(wasCompleted = true))
                             }
+                        listeners.forEach { it.onAlarmReceived() }
                     }
                 }
             }
@@ -79,8 +79,7 @@ class PersistentAlarmSchedulerImpl @Inject constructor(
     override fun onStart() {
         context.registerReceiver(alarmBroadcastReceiver, IntentFilter(ACTION_ON_ALARM_RECEIVE))
         localBroadcastManager.registerReceiver(
-            gazeTimerBroadcastReceiver,
-            IntentFilter(NotificationForegroundService.ACTION_GAZE_TIMER_COMPLETED)
+            gazeTimerBroadcastReceiver, IntentFilter(ACTION_GAZE_TIMER_COMPLETED)
         )
     }
 
@@ -88,7 +87,7 @@ class PersistentAlarmSchedulerImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             Timber.d("scheduleAlarm: new")
             scheduledAlarmCache.setAlarmData(
-                ScheduledAlarmCacheImpl.AlarmData(
+                ScheduledAlarmCache.AlarmData(
                     triggerAtMillis = triggerAtMillis,
                     repeat = repeat,
                     alarmInterval = interval,

@@ -9,19 +9,19 @@ interface EyeCareUiCountDownTimer {
 
         object NotStarted : AlarmState()
 
-        data class InProgress(
-            val remainingTimeString: String = "",
+        data class InProgressWork(
+            val remainingTimeString: String,
             val percentage: Int = 0,
         ) : AlarmState()
 
-        object Completed : AlarmState()
+        data class InProgressRest(
+            val remainingTimeString: String,
+            val percentage: Int = 0,
+        ) : AlarmState()
 
-        object Cancelled : AlarmState()
     }
 
     fun getCountDownTimerData(): MutableStateFlow<AlarmState>
-
-    fun get20SecondsGazePercentageValue(): MutableStateFlow<Int>
 
     fun clear()
 

@@ -16,6 +16,10 @@ class MyCountDownTimer @Inject constructor() {
         private const val TAG = "MyCountDownTimer"
     }
 
+    private var _isRunning: Boolean = false
+    val isRunning: Boolean
+        get() = _isRunning
+
     private var job: Job? = null
 
     /**
@@ -33,6 +37,7 @@ class MyCountDownTimer @Inject constructor() {
         job?.cancel()
         job = CoroutineScope(Dispatchers.Main.immediate).launch {
             try {
+                _isRunning = true
                 val seconds =
                     TimeUnit.MILLISECONDS.toSeconds(millisInFuture)
                 Timber.tag(TAG).i("start: total seconds:%s", seconds)
@@ -40,8 +45,10 @@ class MyCountDownTimer @Inject constructor() {
                     onTimerTick(seconds.toInt() - i.toInt(), TimeUnit.SECONDS.toMillis(i))
                     delay(1000)
                 }
+                _isRunning = false
                 onCompleted()
             } catch (_: CancellationException) {
+                _isRunning = false
                 onCancelled()
             }
         }

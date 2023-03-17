@@ -1,15 +1,10 @@
 package com.pramod.eyecare.framework.ui.fragment.home
 
 import android.Manifest
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.transition.TransitionManager
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -28,7 +23,6 @@ import com.pramod.eyecare.framework.ui.utils.isServiceRunning
 import com.pramod.eyecare.framework.ui.utils.updateMargin
 import com.pramod.eyecare.framework.ui.utils.viewBinding
 import com.pramod.eyecare.framework.service.EyeCarePersistentForegroundService
-import com.pramod.eyecare.framework.service.NotificationForegroundService
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -61,14 +55,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         bindServiceActiveState()
         handleStartStopFabClick()
         bindTimerData()
-        bindGazeProgressIndication()
         bindTips()
-    }
-
-    private fun bindGazeProgressIndication() {
-        viewModel.gazePercentage.observe(viewLifecycleOwner) { progress ->
-            binding.progressGazePercentage.setProgressCompat(progress, true)
-        }
     }
 
     private fun bindTips() {
@@ -84,33 +71,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             when (state) {
                 EyeCareUiCountDownTimer.AlarmState.NotStarted -> {
                     binding.progressTimeRemaining.hide()
+                    binding.progressGazePercentage.hide()
                     binding.lottie.isVisible = false
                     binding.tvTimeRemaining.isVisible = false
                     binding.lottieWorkingGuy.isVisible = true
                 }
-                is EyeCareUiCountDownTimer.AlarmState.InProgress -> {
+                is EyeCareUiCountDownTimer.AlarmState.InProgressWork -> {
                     binding.progressTimeRemaining.show()
+                    binding.progressGazePercentage.hide()
                     binding.lottie.isVisible = false
                     binding.tvTimeRemaining.isVisible = true
                     binding.lottieWorkingGuy.isVisible = false
                     binding.tvTimeRemaining.text = state.remainingTimeString
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        binding.progressTimeRemaining.setProgress(100 - state.percentage, true)
-                    } else {
-                        binding.progressTimeRemaining.progress = 100 - state.percentage
-                    }
+                    binding.progressTimeRemaining.setProgressCompat(100 - state.percentage, true)
                 }
-                EyeCareUiCountDownTimer.AlarmState.Completed -> {
+                is EyeCareUiCountDownTimer.AlarmState.InProgressRest -> {
                     binding.progressTimeRemaining.hide()
+                    binding.progressGazePercentage.show()
                     binding.lottie.isVisible = true
                     binding.tvTimeRemaining.isVisible = false
                     binding.lottieWorkingGuy.isVisible = false
-                }
-                EyeCareUiCountDownTimer.AlarmState.Cancelled -> {
-                    binding.progressTimeRemaining.hide()
-                    binding.lottie.isVisible = false
-                    binding.tvTimeRemaining.isVisible = false
-                    binding.lottieWorkingGuy.isVisible = true
+                    binding.progressGazePercentage.setProgressCompat(state.percentage, true)
                 }
             }
         }

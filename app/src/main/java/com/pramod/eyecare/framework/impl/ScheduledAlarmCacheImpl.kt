@@ -17,29 +17,19 @@ class ScheduledAlarmCacheImpl @Inject constructor(
     @ApplicationContext private val context: Context,
 ) : ScheduledAlarmCache {
 
-    data class AlarmData(
-        val triggerAtMillis: Long,
-        val alarmInterval: Long,
-        val repeat: Boolean,
-
-        val wasCompleted: Boolean = false,
-        val wasCancelled: Boolean = false,
-        val isStarted: Boolean = false,
-    )
-
     private val scheduleAlarmDataKey = stringPreferencesKey("scheduleAlarmDataKey")
 
     private val gson = Gson()
 
-    override fun getScheduledAlarmData(): Flow<AlarmData?> {
+    override fun getScheduledAlarmData(): Flow<ScheduledAlarmCache.AlarmData?> {
         return context.appDataStore.data.map { pref ->
             gson.fromJson(
-                pref[scheduleAlarmDataKey], AlarmData::class.java
+                pref[scheduleAlarmDataKey], ScheduledAlarmCache.AlarmData::class.java
             )
         }
     }
 
-    override suspend fun setAlarmData(alarmData: AlarmData) {
+    override suspend fun setAlarmData(alarmData: ScheduledAlarmCache.AlarmData) {
         withContext(Dispatchers.IO) {
             context.appDataStore.edit { pref ->
                 pref[scheduleAlarmDataKey] = gson.toJson(alarmData)

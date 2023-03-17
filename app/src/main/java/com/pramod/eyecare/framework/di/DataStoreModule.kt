@@ -1,9 +1,11 @@
 package com.pramod.eyecare.framework.di
 
+import com.pramod.eyecare.business.CopyHelper
 import com.pramod.eyecare.business.ScheduledAlarmCache
 import com.pramod.eyecare.framework.impl.ScheduledAlarmCacheImpl
 import com.pramod.eyecare.business.EyeCareUiCountDownTimer
 import com.pramod.eyecare.business.RemoteConfig
+import com.pramod.eyecare.framework.data.CopyHelperImpl
 import com.pramod.eyecare.framework.data.RemoteConfigImpl
 import com.pramod.eyecare.framework.ui.EyeCareUiCountDownTimerImpl
 import dagger.Binds
@@ -23,6 +25,9 @@ interface DataStoreModule {
 
     @Binds
     fun provideRemoteConfig(remoteConfigImpl: RemoteConfigImpl): RemoteConfig
+
+    @Binds
+    fun provideCopyHelper(copyHelperImpl: CopyHelperImpl): CopyHelper
 
 
 }

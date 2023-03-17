@@ -13,7 +13,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
     private val eyeCareUiCountDownTimer: EyeCareUiCountDownTimer,
     private val getRandomEyeCareTip: GetRandomEyeCareTip
 ) : ViewModel() {
@@ -22,8 +21,6 @@ class HomeViewModel @Inject constructor(
     val isServiceRunning = _isServiceRunning.asLiveData()
 
     val uiAlarmStateTimer = eyeCareUiCountDownTimer.getCountDownTimerData().asLiveData()
-
-    val gazePercentage = eyeCareUiCountDownTimer.get20SecondsGazePercentageValue().asLiveData()
 
     val tip = getRandomEyeCareTip().asLiveData()
 
