@@ -4,16 +4,17 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
+import android.media.AudioAttributes
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat.*
 import com.pramod.eyecare.R
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.concurrent.ConcurrentLinkedQueue
 import javax.inject.Inject
+
 
 fun Intent.toActivityPendingIntent(
     context: Context,
@@ -51,7 +52,8 @@ class NotificationHelper @Inject constructor(
         const val CHANNEL_ID_DEFAULT = "notification_deault"
         const val CHANNEL_NAME_DEFAULT = "Default"
 
-        const val CHANNEL_ID_SERVICE_RUNNING_IMPORTANT_LOW = "notification_service_running_status"
+        const val CHANNEL_ID_SERVICE_RUNNING_IMPORTANT_LOW =
+            "notification_service_running_status"
         const val CHANNEL_NAME_SERVICE_RUNNING_IMPORTANT_LOW = "Service running status"
 
         const val CHANNEL_ID_202020_REMINDER_IMPORTANT_HIGH = "notification_20_20_20_Reminder"
@@ -66,7 +68,8 @@ class NotificationHelper @Inject constructor(
             CHANNEL_ID_SERVICE_RUNNING_IMPORTANT_LOW, CHANNEL_NAME_SERVICE_RUNNING_IMPORTANT_LOW
         ),
         REMINDER_202020(
-            CHANNEL_ID_202020_REMINDER_IMPORTANT_HIGH, CHANNEL_NAME_202020_REMINDER_IMPORTANT_HIGH
+            CHANNEL_ID_202020_REMINDER_IMPORTANT_HIGH,
+            CHANNEL_NAME_202020_REMINDER_IMPORTANT_HIGH
         )
     }
 
@@ -78,14 +81,21 @@ class NotificationHelper @Inject constructor(
 
     private val listeners = ConcurrentLinkedQueue<NotificationActionCallback>()
 
+    private val autoTimeToTakeRest by lazy {
+        Uri.parse("${ContentResolver.SCHEME_ANDROID_RESOURCE}://${context.packageName}/raw/time_to_take_rest")
+    }
+
+    private val defaultVibrationPattern = arrayOf(0L, 200, 200, 400).toLongArray()
+
     //region creating notification channels
-    private val defaultNotificationChannel = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        NotificationChannel(
-            CHANNEL_ID_DEFAULT, CHANNEL_NAME_DEFAULT, NotificationManager.IMPORTANCE_DEFAULT
-        ).apply {
-            enableVibration(true)
-        }
-    } else null
+    private val defaultNotificationChannel =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel(
+                CHANNEL_ID_DEFAULT, CHANNEL_NAME_DEFAULT, NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
+                enableVibration(true)
+            }
+        } else null
 
     private val reminding202020NotificationChannel =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -94,6 +104,14 @@ class NotificationHelper @Inject constructor(
                 CHANNEL_NAME_202020_REMINDER_IMPORTANT_HIGH,
                 NotificationManager.IMPORTANCE_HIGH
             ).apply {
+                vibrationPattern = defaultVibrationPattern
+                importance = NotificationManager.IMPORTANCE_HIGH
+                setSound(
+                    autoTimeToTakeRest, AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                        .setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                        .build()
+                )
                 enableVibration(true)
             }
         } else null
@@ -115,6 +133,7 @@ class NotificationHelper @Inject constructor(
             }
         }
     }
+
 
     fun registerListenerNotificationButtonClick(
         notificationActionCallback: NotificationActionCallback,
@@ -148,9 +167,13 @@ class NotificationHelper @Inject constructor(
                     NotificationChannel.SERVICE_RUNNING -> PRIORITY_LOW
                     NotificationChannel.REMINDER_202020 -> PRIORITY_MAX
                 }
+                if (notificationChannel == NotificationChannel.REMINDER_202020) {
+                    setSound(autoTimeToTakeRest)
+                    setVibrate(defaultVibrationPattern)
+                }
                 buttons.forEach { addAction(-1, it.text, it.pendingIntent) }
                 if (vibrate) {
-                    setVibrate(arrayOf(0L, 200, 200, 400).toLongArray())
+                    setVibrate(defaultVibrationPattern)
                 }
             }.setOngoing(isOnGoing).setOnlyAlertOnce(isOnGoing).build()
     }
@@ -180,6 +203,17 @@ class NotificationHelper @Inject constructor(
 
     fun clear() {
         context.unregisterReceiver(notificationActionBroadcastReceiver)
+    }
+
+    fun playNotificationDismissSound() {
+        try {
+            val notificationUri =
+                Uri.parse("${ContentResolver.SCHEME_ANDROID_RESOURCE}://${context.packageName}/raw/you_can_work_now")
+            val r = RingtoneManager.getRingtone(context, notificationUri)
+            r.play()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     init {

@@ -116,6 +116,9 @@ class EyeCarePersistentForegroundService : LifecycleService(), NotificationActio
     @Inject
     lateinit var scheduledAlarmCache: ScheduledAlarmCache
 
+    @Inject
+    lateinit var vibrationHelper: VibrationHelper
+
     //endregion
 
     private var jobWorking: Job? = null
@@ -214,7 +217,7 @@ class EyeCarePersistentForegroundService : LifecycleService(), NotificationActio
                 id = NOTIFICATION_REMINDER_ID,
                 notification = getRestingNotification(20, false)
             )
-            alarmScheduler.getLatestScheduleAlarmData().firstOrNull { it?.wasCompleted == true }
+            scheduledAlarmCache.getScheduledAlarmData().firstOrNull { it?.wasCompleted == true }
                 ?.let { alarmData ->
                     restingCountDownTimer.start(
                         millisInFuture = GAZE_TIME,
@@ -233,6 +236,8 @@ class EyeCarePersistentForegroundService : LifecycleService(), NotificationActio
                             )
                         },
                         onCompleted = {
+                            notificationHelper.playNotificationDismissSound()
+                            vibrationHelper.vibrate(400)
                             notificationHelper.cancelNotification(NOTIFICATION_REMINDER_ID)
                             localBroadcastManager.sendBroadcast(Intent(ACTION_GAZE_TIMER_COMPLETED))
                         },
