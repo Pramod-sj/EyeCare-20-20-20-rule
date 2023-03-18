@@ -44,10 +44,6 @@
             android:name=".framework.service.EyeCarePersistentForegroundService"
             android:enabled="true" />
 
-        <service
-            android:name=".framework.service.NotificationForegroundService"
-            android:enabled="true" />
-
         <receiver
             android:name=".framework.receiver.BootReceiver"
             android:exported="true">
