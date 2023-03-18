@@ -5,12 +5,14 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">?attr/isLightTheme</item>
+        <item name="fontFamily">@font/google_sans_font_family</item>
     </style>
 
     <style name="Theme.EyeCare202020Rule.FabService.Start" parent="Widget.Material3.FloatingActionButton.Large.Primary" />
 
     <style name="Theme.EyeCare202020Rule.FabService.Stop" parent="Theme.EyeCare202020Rule.FabService.Start">
         <item name="backgroundTint">@android:color/holo_red_light</item>
+        <item name="iconTint">@color/white</item>
     </style>
 
 </resources>

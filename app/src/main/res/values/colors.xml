@@ -11,5 +11,5 @@
     <color name="circular_progress_track_color">#1A6200EE</color>
     <color name="gaze_progress_track_color">#1A99CC00</color>
 
-    <color name="card_tip_border_color">#9A9A9A</color>
+    <color name="card_tip_border_color">#809A9A9A</color>
 </resources>
