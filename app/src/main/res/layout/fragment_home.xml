@@ -9,12 +9,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Hello!"
-        android:textSize="34sp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/app_name"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/tv_message"
@@ -29,75 +29,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_greeting" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_working_guy"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_message"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_url="https://assets7.lottiefiles.com/packages/lf20_wcwcr5u6.json" />
+    <FrameLayout
+        android:id="@+id/cl_body"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_message">
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progress_time_remaining"
-        android:layout_width="wrap_content"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_working_guy"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_url="https://assets7.lottiefiles.com/packages/lf20_wcwcr5u6.json" />
+
+        <include
+            android:id="@+id/incl_working"
+            layout="@layout/layout_working_timer_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <include
+            android:id="@+id/incl_resting"
+            layout="@layout/layout_resting_timer_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_tip"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:progress="50"
-        app:indicatorSize="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_message"
-        app:trackColor="@color/circular_progress_track_color"
-        app:trackCornerRadius="5dp"
-        app:trackThickness="10dp" />
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="10dp"
+        app:cardElevation="0dp"
+        app:contentPadding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cl_body"
+        app:strokeColor="@color/card_tip_border_color"
+        app:strokeWidth="1dp">
 
-    <TextView
-        android:id="@+id/tv_time_remaining"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fontFamily="sans-serif-black"
-        android:gravity="center"
-        android:text="19:59"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@id/progress_time_remaining"
-        app:layout_constraintEnd_toEndOf="@id/progress_time_remaining"
-        app:layout_constraintStart_toStartOf="@id/progress_time_remaining"
-        app:layout_constraintTop_toTopOf="@id/progress_time_remaining" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="@id/progress_time_remaining"
-        app:layout_constraintEnd_toEndOf="@id/progress_time_remaining"
-        app:layout_constraintStart_toStartOf="@id/progress_time_remaining"
-        app:layout_constraintTop_toTopOf="@id/progress_time_remaining"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_url="https://assets8.lottiefiles.com/packages/lf20_lnc7r5pw.json" />
+            <TextView
+                android:id="@+id/tv_tip_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.8"
+                android:text="Tip: " />
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/progress_gaze_percentage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:progress="50"
-        app:indicatorColor="@android:color/holo_green_light"
-        app:layout_constraintEnd_toEndOf="@id/lottie"
-        app:layout_constraintStart_toStartOf="@id/lottie"
-        app:layout_constraintTop_toBottomOf="@id/lottie"
-        app:trackColor="@color/gaze_progress_track_color"
-        app:trackCornerRadius="5dp"
-        app:trackThickness="10dp" />
+            <TextView
+                android:id="@+id/tv_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/fab_start_service" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <TextView
-        android:id="@+id/tv_tips"
-        app:layout_constraintBottom_toTopOf="@id/fab_start_service"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_start_service"

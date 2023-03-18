@@ -67,31 +67,30 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun bindTimerData() {
         viewModel.uiAlarmStateTimer.observe(viewLifecycleOwner) { state ->
             Timber.d("bindTimerData: $state")
-            TransitionManager.beginDelayedTransition(binding.root)
             when (state) {
                 EyeCareUiCountDownTimer.AlarmState.NotStarted -> {
-                    binding.progressTimeRemaining.hide()
-                    binding.progressGazePercentage.hide()
-                    binding.lottie.isVisible = false
-                    binding.tvTimeRemaining.isVisible = false
+                    binding.inclResting.root.isVisible = false
+                    binding.inclWorking.root.isVisible = false
                     binding.lottieWorkingGuy.isVisible = true
                 }
                 is EyeCareUiCountDownTimer.AlarmState.InProgressWork -> {
-                    binding.progressTimeRemaining.show()
-                    binding.progressGazePercentage.hide()
-                    binding.lottie.isVisible = false
-                    binding.tvTimeRemaining.isVisible = true
+                    binding.inclWorking.root.isVisible = true
+                    binding.inclResting.root.isVisible = false
                     binding.lottieWorkingGuy.isVisible = false
-                    binding.tvTimeRemaining.text = state.remainingTimeString
-                    binding.progressTimeRemaining.setProgressCompat(100 - state.percentage, true)
+                    binding.inclWorking.tvTimeRemaining.text = state.remainingTimeString
+                    binding.inclWorking.progressTimeRemaining.setProgressCompat(
+                        100 - state.percentage,
+                        true
+                    )
                 }
                 is EyeCareUiCountDownTimer.AlarmState.InProgressRest -> {
-                    binding.progressTimeRemaining.hide()
-                    binding.progressGazePercentage.show()
-                    binding.lottie.isVisible = true
-                    binding.tvTimeRemaining.isVisible = false
-                    binding.lottieWorkingGuy.isVisible = false
-                    binding.progressGazePercentage.setProgressCompat(state.percentage, true)
+                    binding.inclWorking.root.isVisible = false
+                    binding.inclResting.root.isVisible = true
+                    binding.inclResting.lottie.isVisible = true
+                    binding.inclResting.progressGazePercentage.setProgressCompat(
+                        state.percentage,
+                        true
+                    )
                 }
             }
         }

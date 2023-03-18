@@ -2,4 +2,5 @@
 <resources>
     <color name="circular_progress_track_color">@color/cardview_dark_background</color>
     <color name="gaze_progress_track_color">@color/cardview_dark_background</color>
+    <color name="card_tip_border_color">#323232</color>
 </resources>
