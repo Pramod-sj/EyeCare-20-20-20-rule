@@ -15,4 +15,18 @@
         <item name="iconTint">@color/white</item>
     </style>
 
+    <style name="Theme.EyeCare202020RuleTheme.ToolbarStyle" parent="Widget.MaterialComponents.Toolbar.Surface">
+        <item name="titleTextAppearance">@style/Theme.EyeCare202020RuleTheme.TitleTextAppearance
+        </item>
+    </style>
+
+    <style name="Theme.EyeCare202020RuleTheme.TitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Theme.EyeCare202020RuleTheme.ImageViewCircularShape" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">40dp</item>
+    </style>
+
 </resources>

@@ -3,4 +3,16 @@
     <color name="circular_progress_track_color">@color/cardview_dark_background</color>
     <color name="gaze_progress_track_color">@color/cardview_dark_background</color>
     <color name="card_tip_border_color">#323232</color>
+
+    <color name="social_media_background_color">#20ACABAB</color>
+    <color name="social_media_stroke_color">@color/grey_extra_dark</color>
+
+
+    <!--Text Colors-->
+    <color name="textColor_highEmphasis">#DEFFFFFF</color>
+    <color name="textColor_mediumEmphasis">#99FFFFFF</color>
+    <color name="textColor_disabled">#61FFFFFF</color>
+    <!--end Text Colors-->
+
+    <color name="stroke_about_cards">#3E3D3D</color>
 </resources>

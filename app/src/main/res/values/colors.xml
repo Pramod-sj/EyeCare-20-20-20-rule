@@ -8,8 +8,26 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="grey_very_extra_dark">#4C4B4B</color>
+    <color name="grey_extra_dark">#5E5D5D</color>
+    <color name="grey_dark">#ACABAB</color>
+    <color name="grey_light">#E6E6E6</color>
+    <color name="grey_extra_light">#F5F3F3</color>
+    <color name="grey_very_extra_light">#FAF7F7</color>
+
     <color name="circular_progress_track_color">#1A6200EE</color>
     <color name="gaze_progress_track_color">#1A99CC00</color>
 
     <color name="card_tip_border_color">#809A9A9A</color>
+
+    <color name="social_media_background_color">#20ACABAB</color>
+    <color name="social_media_stroke_color">#ACABAB</color>
+
+    <!--Text Colors-->
+    <color name="textColor_highEmphasis">#B3000000</color>
+    <color name="textColor_mediumEmphasis">#99000000</color>
+    <color name="textColor_disabled">#61000000</color>
+    <!--Text Colors for Dark-->
+
+    <color name="stroke_about_cards">@color/grey_light</color>
 </resources>

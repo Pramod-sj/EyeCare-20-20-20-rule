@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="padding_large">32dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+
+    <dimen name="margin_large">32dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_small">10dp</dimen>
+
+    <dimen name="about_us_card_stroke_width">1dp</dimen>
+    <dimen name="about_us_card_radius">10dp</dimen>
+
+    <dimen name="about_us_card_social_button_size">24dp</dimen>
 </resources>
