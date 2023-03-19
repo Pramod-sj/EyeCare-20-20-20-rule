@@ -2,6 +2,7 @@ package com.pramod.eyecare.framework.ui.settings
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.marginTop
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
@@ -23,11 +24,25 @@ class SettingsFragment : Fragment(R.layout.fragment_settings),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.root.doWithInset { view, top, bottom ->
-            binding.clAppbar.updatePadding(top = binding.clAppbar.paddingTop + top)
-        }
+        setUpToolbar()
+        handleInset()
         bindSettingItems()
     }
+
+    private fun setUpToolbar() {
+        binding.inclAppBar.toolbar.title = "Settings"
+        binding.inclAppBar.toolbar.navigationIcon =
+            ContextCompat.getDrawable(requireContext(), R.drawable.ic_round_keyboard_backspace_24)
+        binding.inclAppBar.toolbar.setNavigationOnClickListener {
+        }
+    }
+
+    private fun handleInset() {
+        binding.root.doWithInset { view, top, bottom ->
+            binding.inclAppBar.appBar.updatePadding(top = top)
+        }
+    }
+
 
     private fun bindSettingItems() {
         val adapter = SettingsAdapter(this)

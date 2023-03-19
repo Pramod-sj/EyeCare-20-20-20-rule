@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ITSCustomLayout">
+        <attr name="title" format="string|reference" />
+        <attr name="subtitle" format="string|reference" />
+        <attr name="icon" format="reference" />
+        <attr name="iconColorTint" format="reference" />
+        <attr name="iconBackgroundTint" format="boolean" />
+        <attr name="showIconBackground" format="boolean" />
+        <attr name="maxSubTitleLines" format="integer" />
+        <attr name="titleTextAppearance" format="reference" />
+        <attr name="subtitleTextAppearance" format="reference" />
+    </declare-styleable>
+</resources>

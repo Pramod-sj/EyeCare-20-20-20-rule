@@ -4,7 +4,8 @@
     android:id="@+id/appBar"
     style="@style/Widget.MaterialComponents.ActionBar.Surface"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:liftOnScroll="true">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"

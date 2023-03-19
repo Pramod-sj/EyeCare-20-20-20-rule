@@ -30,4 +30,7 @@
     <!--Text Colors for Dark-->
 
     <color name="stroke_about_cards">@color/grey_light</color>
+
+    <color name="colorOnSurface">?attr/colorOnSurface</color>
+
 </resources>

@@ -34,26 +34,28 @@
         </FrameLayout>
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/txtView_custom_title"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/txtView_custom_subtitle"
-        app:layout_constraintStart_toEndOf="@id/its_frame_layout_head"
-        app:layout_constraintTop_toTopOf="@id/its_frame_layout_head"
-        tools:text="About" />
-
-    <TextView
-        android:id="@+id/txtView_custom_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="2"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@id/its_frame_layout_head"
         app:layout_constraintStart_toEndOf="@id/its_frame_layout_head"
-        app:layout_constraintStart_toStartOf="@id/txtView_custom_title"
-        app:layout_constraintTop_toBottomOf="@id/txtView_custom_title"
-        tools:text="Version 1.0.0" />
+        app:layout_constraintTop_toTopOf="@id/its_frame_layout_head">
+
+        <TextView
+            android:id="@+id/txtView_custom_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            tools:text="About" />
+
+        <TextView
+            android:id="@+id/txtView_custom_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            tools:text="Version 1.0.0" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

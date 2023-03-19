@@ -13,7 +13,7 @@ import com.pramod.eyecare.framework.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AboutFragment : Fragment(R.layout.fragment_about) {
+class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemListener {
 
     private val binding by viewBinding<FragmentAboutBinding>()
 
@@ -27,7 +27,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
     }
 
     private fun bindAboutAdapter() {
-        val adapter = AboutAdapter()
+        val adapter = AboutAdapter(this)
         binding.rvAboutUsItems.adapter = adapter
         viewModel.aboutUiItems.observe(viewLifecycleOwner) {
             adapter.submitList(it)
@@ -45,6 +45,19 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
         binding.inclAppBar.toolbar.navigationIcon =
             ContextCompat.getDrawable(requireContext(), R.drawable.ic_round_keyboard_backspace_24)
         binding.inclAppBar.toolbar.setNavigationOnClickListener {
+        }
+    }
+
+    override fun onItemClick(id: AboutInnerItemIdEnum, aboutInnerItem: AboutInnerItem) {
+        when (id) {
+            AboutInnerItemIdEnum.FORK_ON_GITHUB -> {}
+            AboutInnerItemIdEnum.DONATE -> {}
+            AboutInnerItemIdEnum.SHARE_APP -> {}
+            AboutInnerItemIdEnum.RATE_US -> {}
+            AboutInnerItemIdEnum.APP_LOGO_CREDIT -> {}
+            AboutInnerItemIdEnum.OPEN_SOURCE_LIBRARIES -> {}
+            AboutInnerItemIdEnum.TERM_AND_SERVICES -> {}
+            AboutInnerItemIdEnum.PRIVACY_POLICY -> {}
         }
     }
 

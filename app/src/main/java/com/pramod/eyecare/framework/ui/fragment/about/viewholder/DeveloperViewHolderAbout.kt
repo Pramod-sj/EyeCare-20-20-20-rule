@@ -4,9 +4,9 @@ import coil.load
 import com.pramod.eyecare.databinding.LayoutAboutDeveloperInfoBinding
 import com.pramod.eyecare.framework.ui.fragment.about.AboutUiItem
 
-class DeveloperViewHolder(
+class DeveloperViewHolderAbout(
     private val binding: LayoutAboutDeveloperInfoBinding,
-) : BaseViewHolder<AboutUiItem>(binding) {
+) : AboutBaseViewHolder<AboutUiItem>(binding) {
 
     init {
 

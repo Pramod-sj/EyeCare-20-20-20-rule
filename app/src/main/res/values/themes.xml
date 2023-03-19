@@ -15,7 +15,7 @@
         <item name="iconTint">@color/white</item>
     </style>
 
-    <style name="Theme.EyeCare202020RuleTheme.ToolbarStyle" parent="Widget.MaterialComponents.Toolbar.Surface">
+    <style name="Theme.EyeCare202020RuleTheme.ToolbarStyle">
         <item name="titleTextAppearance">@style/Theme.EyeCare202020RuleTheme.TitleTextAppearance
         </item>
     </style>

@@ -2,12 +2,11 @@ package com.pramod.eyecare.framework.ui.settings
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isGone
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.pramod.eyecare.business.domain.SettingItem
-import com.pramod.eyecare.databinding.ItemSettingLayoutBinding
+import com.pramod.eyecare.databinding.ItemSettingsLayoutBinding
 
 private val SettingItemComparator = object : DiffUtil.ItemCallback<SettingItem>() {
     override fun areItemsTheSame(oldItem: SettingItem, newItem: SettingItem): Boolean {
@@ -26,13 +25,13 @@ class SettingsAdapter(private val onSettingItemClickListener: OnSettingItemClick
         fun onItemClick(position: Int, settingItem: SettingItem)
     }
 
-    inner class SettingItemViewHolder(private val binding: ItemSettingLayoutBinding) :
+    inner class SettingItemViewHolder(private val binding: ItemSettingsLayoutBinding) :
         ViewHolder(binding.root) {
 
         fun load(settingItem: SettingItem) {
-            binding.txtViewCustomTitle.text = settingItem.title
-            binding.txtViewCustomSubtitle.text = settingItem.subTitle
-            binding.txtViewCustomSubtitle.isGone = settingItem.subTitle == null
+            binding.item.setTitle(settingItem.title)
+            binding.item.setSubTitle(settingItem.subTitle)
+            binding.item.setIsSubtitleVisible(settingItem.subTitle != null)
             binding.root.setOnClickListener {
                 onSettingItemClickListener.onItemClick(adapterPosition, settingItem)
             }
@@ -41,7 +40,7 @@ class SettingsAdapter(private val onSettingItemClickListener: OnSettingItemClick
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingItemViewHolder {
         return SettingItemViewHolder(
-            binding = ItemSettingLayoutBinding.inflate(
+            binding = ItemSettingsLayoutBinding.inflate(
                 /* inflater = */ LayoutInflater.from(parent.context),
                 /* parent = */ parent,
                 /* attachToParent = */ false
