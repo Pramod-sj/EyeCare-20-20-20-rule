@@ -29,9 +29,9 @@ class SettingsAdapter(private val onSettingItemClickListener: OnSettingItemClick
         ViewHolder(binding.root) {
 
         fun load(settingItem: SettingItem) {
-            binding.item.setTitle(settingItem.title)
-            binding.item.setSubTitle(settingItem.subTitle)
-            binding.item.setIsSubtitleVisible(settingItem.subTitle != null)
+            binding.item.title = settingItem.title
+            binding.item.subtitle = settingItem.subTitle
+            binding.item.isSubtitleVisible = settingItem.subTitle != null
             binding.root.setOnClickListener {
                 onSettingItemClickListener.onItemClick(adapterPosition, settingItem)
             }

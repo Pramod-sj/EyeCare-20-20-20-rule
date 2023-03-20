@@ -6,8 +6,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.pramod.eyecare.R
 import com.pramod.eyecare.databinding.FragmentAboutBinding
+import com.pramod.eyecare.framework.ui.utils.applyMaterialAxisTransition
 import com.pramod.eyecare.framework.ui.utils.doWithInset
 import com.pramod.eyecare.framework.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +20,11 @@ class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemL
     private val binding by viewBinding<FragmentAboutBinding>()
 
     private val viewModel by viewModels<AboutViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        applyMaterialAxisTransition()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,6 +52,7 @@ class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemL
         binding.inclAppBar.toolbar.navigationIcon =
             ContextCompat.getDrawable(requireContext(), R.drawable.ic_round_keyboard_backspace_24)
         binding.inclAppBar.toolbar.setNavigationOnClickListener {
+            findNavController().popBackStack()
         }
     }
 

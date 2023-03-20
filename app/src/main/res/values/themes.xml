@@ -21,12 +21,22 @@
     </style>
 
     <style name="Theme.EyeCare202020RuleTheme.TitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Theme.EyeCare202020RuleTheme.ImageViewCircularShape" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerSize">40dp</item>
+    </style>
+
+    <style name="CustomLayoutTitleTextAppearance" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:fontFamily">@font/googlesans_medium</item>
+        <item name="fontFamily">@font/googlesans_medium</item>
+        <item name="android:textColor">@color/textColor_highEmphasis</item>
+    </style>
+
+    <style name="CustomLayoutSubtitleTextAppearance" parent="TextAppearance.MaterialComponents.Body2" >
+        <item name="android:textColor">@color/textColor_mediumEmphasis</item>
     </style>
 
 </resources>

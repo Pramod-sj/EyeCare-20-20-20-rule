@@ -23,10 +23,11 @@ class SupportViewHolderAbout(
             itemComparator = AboutUsInnerItemComparator,
             onBindCallback = { pos, rowBinding, innerItem ->
                 innerItem.iconRes?.let {
-                    rowBinding.item.setIcon(innerItem.iconRes)
+                    rowBinding.item.icon = (innerItem.iconRes)
                 }
-                rowBinding.item.setTitle(innerItem.title)
-                rowBinding.item.setSubTitle(innerItem.subtitle)
+                rowBinding.item.title = (innerItem.title)
+                rowBinding.item.subtitle = (innerItem.subtitle)
+                rowBinding.item.isSubtitleVisible = innerItem.subtitle!=null
                 rowBinding.root.setOnClickListener {
                     listener?.onItemClick(innerItem.id, innerItem)
                 }

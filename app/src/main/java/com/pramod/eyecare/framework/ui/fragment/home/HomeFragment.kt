@@ -14,15 +14,14 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.navigation.fragment.findNavController
+import coil.load
 import com.pramod.eyecare.*
 import com.pramod.eyecare.business.EyeCareUiCountDownTimer
 import com.pramod.eyecare.databinding.FragmentHomeBinding
 import com.pramod.eyecare.framework.helper.VibrationHelper
-import com.pramod.eyecare.framework.ui.utils.doWithInset
-import com.pramod.eyecare.framework.ui.utils.isServiceRunning
-import com.pramod.eyecare.framework.ui.utils.updateMargin
-import com.pramod.eyecare.framework.ui.utils.viewBinding
 import com.pramod.eyecare.framework.service.EyeCarePersistentForegroundService
+import com.pramod.eyecare.framework.ui.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import javax.inject.Inject
@@ -48,14 +47,29 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        applyMaterialAxisTransition()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         updateViewInset()
+        setUpToolbar()
         checkServiceRunningState()
         bindServiceActiveState()
         handleStartStopFabClick()
         bindTimerData()
         bindTips()
+    }
+
+    private fun setUpToolbar() {
+        binding.clAppbar.toolbar.title = resources.getString(R.string.app_name)
+        binding.clAppbar.btnOptionMenu.isVisible = true
+        binding.clAppbar.btnOptionMenu.load(R.drawable.ic_outline_settings_24)
+        binding.clAppbar.btnOptionMenu.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+        }
     }
 
     private fun bindTips() {
@@ -100,7 +114,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.root.doWithInset { view, top, bottom ->
             binding.fabStartService.updateMargin(bottom = binding.fabStartService.marginBottom + bottom)
             binding.fabStopService.updateMargin(bottom = binding.fabStopService.marginBottom + bottom)
-            binding.clAppbar.updatePadding(top = binding.tvTitle.paddingTop + top)
+            binding.clAppbar.appBar.updatePadding(top = top)
         }
     }
 

@@ -101,4 +101,8 @@ dependencies {
     implementation "androidx.core:core-splashscreen:1.0.0"
 
     implementation("io.coil-kt:coil:2.2.2")
+
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+
 }

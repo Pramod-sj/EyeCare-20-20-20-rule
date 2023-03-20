@@ -19,7 +19,7 @@ class GetSettingItemUseCase @Inject constructor() {
                 title = "Share app",
                 subTitle = "Share app with your colleague and friends"
             ),
-            SettingItem(id = "id_about", iconUrl = "ic_about_us", title = "About", subTitle = "")
+            SettingItem(id = "id_about", iconUrl = "ic_about_us", title = "About")
         )
     }
 
