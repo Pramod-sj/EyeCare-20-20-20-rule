@@ -68,6 +68,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.clAppbar.btnOptionMenu.isVisible = true
         binding.clAppbar.btnOptionMenu.load(R.drawable.ic_outline_settings_24)
         binding.clAppbar.btnOptionMenu.setOnClickListener {
+            vibrationHelper.vibrate(100)
             findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
         }
     }
