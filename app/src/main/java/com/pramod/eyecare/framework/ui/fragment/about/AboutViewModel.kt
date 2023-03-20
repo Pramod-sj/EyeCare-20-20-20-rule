@@ -59,7 +59,7 @@ class AboutViewModel : ViewModel() {
                     AboutInnerItem(
                         AboutInnerItemIdEnum.OPEN_SOURCE_LIBRARIES,
                         "Open source libraries",
-                        iconRes = R.drawable.ic_open_source_license
+                        iconRes = R.drawable.ic_license
                     ),
                     AboutInnerItem(
                         AboutInnerItemIdEnum.TERM_AND_SERVICES,
