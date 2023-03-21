@@ -3,6 +3,7 @@ package com.pramod.eyecare.framework.view
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -29,7 +30,8 @@ class ITSCustomLayout
         }
 
     @ColorInt
-    var iconTintColor: Int = -1
+    var iconTintColor: Int =
+        context.getColorFromAttr(com.google.android.material.R.attr.colorAccent)
         set(value) {
             field = value
             setIcon(tint = iconTintColor, showCircularBg = showIconBackground, resId = icon)
@@ -69,6 +71,15 @@ class ITSCustomLayout
             requestLayout()
         }
 
+
+    var iconVisibility: Int = View.VISIBLE
+        set(value) {
+            field = value
+            Log.i("TAG", "isVisible: " + field)
+            customItsLayoutBinding.itsFrameLayoutHead.visibility = value
+            invalidate()
+        }
+
     private fun setIcon(
         @DrawableRes resId: Int,
         tint: Int,
@@ -85,6 +96,11 @@ class ITSCustomLayout
                 val colorWithAlphaComponent = ColorUtils.setAlphaComponent(tint, 30)
                 customItsLayoutBinding.itsFrameLayoutImageIcon.backgroundTintList =
                     ColorStateList.valueOf(colorWithAlphaComponent)
+            } else {
+                customItsLayoutBinding.itsFrameLayoutImageIcon.backgroundTintList =
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(context, android.R.color.transparent)
+                    )
             }
         } else {
             customItsLayoutBinding.itsFrameLayoutImageIcon.visibility = View.INVISIBLE
@@ -115,6 +131,11 @@ class ITSCustomLayout
         TextViewCompat.setTextAppearance(
             customItsLayoutBinding.txtViewCustomSubtitle, R.style.CustomLayoutSubtitleTextAppearance
         )
+        iconVisibility = when (a.getInt(R.styleable.ITSCustomLayout_iconVisibility, 0)) {
+            0 -> View.VISIBLE
+            1 -> View.INVISIBLE
+            else -> View.GONE
+        }
         a.recycle()
     }
 }

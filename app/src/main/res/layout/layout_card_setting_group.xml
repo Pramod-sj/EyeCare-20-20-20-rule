@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_medium"
-    app:cardCornerRadius="@dimen/about_us_card_radius"
-    app:strokeColor="@color/stroke_about_cards"
-    app:strokeWidth="@dimen/about_us_card_stroke_width">
+    android:layout_marginBottom="@dimen/margin_medium"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -24,13 +24,13 @@
             android:textColor="?colorPrimary" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_about_us_inner_items"
+            android:id="@+id/rv_settings_inner_items"
             android:layout_width="match_parent"
+            android:nestedScrollingEnabled="true"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/custom_item_layout" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </com.google.android.material.card.MaterialCardView>

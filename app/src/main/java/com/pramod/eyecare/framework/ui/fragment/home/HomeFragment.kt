@@ -115,7 +115,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.root.doWithInset { view, top, bottom ->
             binding.fabStartService.updateMargin(bottom = binding.fabStartService.marginBottom + bottom)
             binding.fabStopService.updateMargin(bottom = binding.fabStopService.marginBottom + bottom)
-            binding.clAppbar.appBar.updatePadding(top = top)
         }
     }
 

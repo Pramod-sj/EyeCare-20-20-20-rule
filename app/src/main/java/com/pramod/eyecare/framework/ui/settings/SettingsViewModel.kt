@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.pramod.eyecare.business.domain.SettingGroup
 import com.pramod.eyecare.business.domain.SettingItem
 import com.pramod.eyecare.business.interactor.GetSettingItemUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,8 +16,8 @@ class SettingsViewModel @Inject constructor(
     private val getSettingItemUseCase: GetSettingItemUseCase,
 ) : ViewModel() {
 
-    private val _settingItems = MutableLiveData<List<SettingItem>>()
-    val settingItems: LiveData<List<SettingItem>>
+    private val _settingItems = MutableLiveData<List<SettingGroup>>()
+    val settingItems: LiveData<List<SettingGroup>>
         get() = _settingItems
 
     private fun fetchSettingsItem() {

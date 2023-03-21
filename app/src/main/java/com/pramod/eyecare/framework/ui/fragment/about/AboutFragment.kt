@@ -43,7 +43,7 @@ class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemL
 
     private fun handleInset() {
         binding.root.doWithInset { view, top, bottom ->
-            binding.inclAppBar.appBar.updatePadding(top = top)
+            binding.rvAboutUsItems.updatePadding(bottom = bottom)
         }
     }
 

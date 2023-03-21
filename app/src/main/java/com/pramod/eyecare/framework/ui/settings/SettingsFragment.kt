@@ -1,16 +1,22 @@
 package com.pramod.eyecare.framework.ui.settings
 
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginTop
+import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.elevation.ElevationOverlayProvider
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.pramod.eyecare.R
 import com.pramod.eyecare.business.domain.SettingItem
 import com.pramod.eyecare.databinding.FragmentSettingsBinding
+import com.pramod.eyecare.framework.helper.NotificationHelper
 import com.pramod.eyecare.framework.ui.utils.applyMaterialAxisTransition
 import com.pramod.eyecare.framework.ui.utils.doWithInset
 import com.pramod.eyecare.framework.ui.utils.viewBinding
@@ -43,11 +49,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings),
         binding.inclAppBar.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+        ViewCompat.setBackground(
+            binding.root,
+            MaterialShapeDrawable.createWithElevationOverlay(requireContext(), 4.0f)
+        )
     }
 
     private fun handleInset() {
         binding.root.doWithInset { view, top, bottom ->
-            binding.inclAppBar.appBar.updatePadding(top = top)
+            //binding.inclAppBar.appBar.updatePadding(top = top)
         }
     }
 
@@ -72,6 +82,17 @@ class SettingsFragment : Fragment(R.layout.fragment_settings),
                 findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
             }
             SettingItemEnum.UNKNOWN -> Unit
+            SettingItemEnum.NOTIFICATION -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
+                    intent.putExtra(Settings.EXTRA_APP_PACKAGE, requireContext().packageName)
+                    intent.putExtra(
+                        Settings.EXTRA_CHANNEL_ID,
+                        NotificationHelper.CHANNEL_ID_202020_REMINDER_IMPORTANT_HIGH
+                    )
+                    startActivity(intent)
+                }
+            }
         }
     }
 
