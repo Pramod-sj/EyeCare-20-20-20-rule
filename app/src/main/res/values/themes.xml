@@ -38,8 +38,8 @@
     <style name="Theme.EyeCare202020Rule.FabService.Start" parent="Widget.Material3.FloatingActionButton.Large.Primary" />
 
     <style name="Theme.EyeCare202020Rule.FabService.Stop" parent="Theme.EyeCare202020Rule.FabService.Start">
-        <item name="backgroundTint">@android:color/holo_red_light</item>
-        <item name="iconTint">@color/white</item>
+        <item name="backgroundTint">?colorError</item>
+        <item name="iconTint">?colorOnError</item>
     </style>
 
     <style name="Theme.EyeCare202020RuleTheme.ToolbarStyle" parent="Widget.Material3.Toolbar.Surface">
