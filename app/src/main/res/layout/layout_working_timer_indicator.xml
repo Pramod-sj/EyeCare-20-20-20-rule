@@ -16,22 +16,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:trackColor="@color/circular_progress_track_color"
+        app:trackColor="?attr/colorPrimaryContainer"
         app:trackCornerRadius="5dp"
         app:trackThickness="10dp" />
 
     <TextView
-        android:id="@+id/tv_time_remaining"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fontFamily="sans-serif-black"
+        android:id="@+id/tv_min_remaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="19:59"
-        android:textSize="24sp"
+        android:includeFontPadding="false"
+        android:text="20"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_dot"
+        app:layout_constraintEnd_toStartOf="@id/tv_dot"
+        app:layout_constraintTop_toTopOf="@id/tv_dot" />
+
+    <TextView
+        android:id="@+id/tv_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:gravity="center"
+        android:text=":"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@id/progress_time_remaining"
         app:layout_constraintEnd_toEndOf="@id/progress_time_remaining"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@id/progress_time_remaining"
         app:layout_constraintTop_toTopOf="@id/progress_time_remaining" />
+
+    <TextView
+        android:id="@+id/tv_sec_remaining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="00"
+        android:textSize="50sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_min_remaining"
+        app:layout_constraintBottom_toBottomOf="@id/tv_dot"
+        app:layout_constraintStart_toEndOf="@id/tv_dot"
+        app:layout_constraintTop_toTopOf="@id/tv_dot" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/incl_appBar"
-        layout="@layout/custom_app_bar_layout" />
+        layout="@layout/custom_collapsing_app_bar_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_setting_items"

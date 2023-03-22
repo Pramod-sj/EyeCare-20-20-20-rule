@@ -1,127 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:transitionGroup="true">
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_url="https://assets10.lottiefiles.com/packages/lf20_s5JXxH8qKY.json" />
+    android:fitsSystemWindows="true">
 
     <include
         android:id="@+id/cl_appbar"
-        layout="@layout/custom_app_bar_layout"
-        app:layout_constraintTop_toTopOf="parent" />
+        layout="@layout/custom_app_bar_layout" />
 
-    <TextView
-        android:id="@+id/tv_message"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/exercise_20_20_20_rule"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl_appbar" />
-
-    <FrameLayout
-        android:id="@+id/cl_body"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_message">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lottie_working_guy"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_url="https://assets6.lottiefiles.com/packages/lf20_wcwcr5u6.json" />
-
-        <include
-            android:id="@+id/incl_working"
-            layout="@layout/layout_working_timer_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-        <include
-            android:id="@+id/incl_resting"
-            layout="@layout/layout_resting_timer_indicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-    </FrameLayout>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_tip"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginVertical="10dp"
-        app:cardBackgroundColor="?attr/colorSecondaryContainer"
-        app:cardElevation="0dp"
-        app:contentPadding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cl_body"
-        app:strokeWidth="0dp">
+        android:fillViewport="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/tv_tip_label"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/ic_tips"
-                android:tint="?colorOnSecondaryContainer" />
+            android:layout_height="0dp">
 
             <TextView
-                android:id="@+id/tv_tips"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_message"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/padding_small"
-                android:textColor="?colorOnSecondaryContainer"
-                app:layout_constraintBottom_toTopOf="@id/fab_start_service" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                android:layout_margin="16dp"
+                android:text="@string/exercise_20_20_20_rule"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </com.google.android.material.card.MaterialCardView>
+            <FrameLayout
+                android:id="@+id/cl_body"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_message">
+
+                <include
+                    android:id="@+id/incl_working"
+                    layout="@layout/layout_working_timer_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <include
+                    android:id="@+id/incl_resting"
+                    layout="@layout/layout_resting_timer_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+            </FrameLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginVertical="10dp"
+                app:cardBackgroundColor="?attr/colorSecondaryContainer"
+                app:cardElevation="0dp"
+                app:contentPadding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_body"
+                app:strokeWidth="0dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/tv_tip_label"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_tips"
+                        android:tint="?colorOnSecondaryContainer" />
+
+                    <TextView
+                        android:id="@+id/tv_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/padding_small"
+                        android:textColor="?colorOnSecondaryContainer"
+                        app:layout_constraintBottom_toTopOf="@id/fab_start_service" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_start_service"
         style="@style/Theme.EyeCare202020Rule.FabService.Start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
         android:layout_margin="16dp"
         android:contentDescription="Start service"
-        android:src="@drawable/ic_round_play_arrow_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:fitsSystemWindows="true"
+        android:src="@drawable/ic_round_play_arrow_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_stop_service"
         style="@style/Theme.EyeCare202020Rule.FabService.Stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
         android:layout_margin="16dp"
         android:contentDescription="Stop service"
+        android:fitsSystemWindows="true"
         android:visibility="gone"
         app:backgroundTint="?attr/colorError"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_round_stop"
         app:tint="?attr/colorOnError" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

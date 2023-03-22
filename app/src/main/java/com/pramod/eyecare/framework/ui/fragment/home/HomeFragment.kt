@@ -1,16 +1,14 @@
 package com.pramod.eyecare.framework.ui.fragment.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.core.view.marginBottom
-import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -54,7 +52,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateViewInset()
         setUpToolbar()
         checkServiceRunningState()
         bindServiceActiveState()
@@ -79,20 +76,24 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun bindTimerData() {
         viewModel.uiAlarmStateTimer.observe(viewLifecycleOwner) { state ->
             Timber.d("bindTimerData: $state")
             when (state) {
                 EyeCareUiCountDownTimer.AlarmState.NotStarted -> {
                     binding.inclResting.root.isVisible = false
-                    binding.inclWorking.root.isVisible = false
-                    binding.lottieWorkingGuy.isVisible = true
+                    binding.inclWorking.root.isVisible = true
+                    binding.inclWorking.tvMinRemaining.text = "20"
+                    binding.inclWorking.tvSecRemaining.text = "00"
+                    binding.inclWorking.progressTimeRemaining.setProgressCompat(100, true)
                 }
                 is EyeCareUiCountDownTimer.AlarmState.InProgressWork -> {
                     binding.inclWorking.root.isVisible = true
                     binding.inclResting.root.isVisible = false
-                    binding.lottieWorkingGuy.isVisible = false
-                    binding.inclWorking.tvTimeRemaining.text = state.remainingTimeString
+                    val time = state.remainingTimeString.split(":")
+                    binding.inclWorking.tvMinRemaining.text = time.firstOrNull()
+                    binding.inclWorking.tvSecRemaining.text = time.lastOrNull()
                     binding.inclWorking.progressTimeRemaining.setProgressCompat(
                         100 - state.percentage,
                         true
@@ -110,14 +111,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
     }
-
-    private fun updateViewInset() {
-        binding.root.doWithInset { view, top, bottom ->
-            binding.fabStartService.updateMargin(bottom = binding.fabStartService.marginBottom + bottom)
-            binding.fabStopService.updateMargin(bottom = binding.fabStopService.marginBottom + bottom)
-        }
-    }
-
     private fun checkServiceRunningState() {
         viewModel.uiAlarmStateTimer.observe(viewLifecycleOwner) {
             viewModel.setIsServiceRunning(
