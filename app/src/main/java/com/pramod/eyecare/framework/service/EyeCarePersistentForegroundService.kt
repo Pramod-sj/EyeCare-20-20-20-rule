@@ -19,6 +19,7 @@ import com.pramod.eyecare.business.CopyHelper.Companion.NOTIFICATION_WORKING_BOD
 import com.pramod.eyecare.business.CopyHelper.Companion.NOTIFICATION_WORKING_TITLE
 import com.pramod.eyecare.business.PersistentAlarmScheduler
 import com.pramod.eyecare.business.ScheduledAlarmCache
+import com.pramod.eyecare.business.SettingPreference
 import com.pramod.eyecare.framework.helper.*
 import com.pramod.eyecare.framework.ui.MainActivity
 import com.pramod.eyecare.framework.ui.utils.isServiceRunning
@@ -118,6 +119,9 @@ class EyeCarePersistentForegroundService : LifecycleService(), NotificationActio
 
     @Inject
     lateinit var vibrationHelper: VibrationHelper
+
+    @Inject
+    lateinit var settingPreference: SettingPreference
 
     //endregion
 
@@ -236,7 +240,11 @@ class EyeCarePersistentForegroundService : LifecycleService(), NotificationActio
                             )
                         },
                         onCompleted = {
-                            notificationHelper.playNotificationDismissSound()
+                            lifecycleScope.launch {
+                                if (settingPreference.getPlayWorkRingtone().firstOrNull() == true) {
+                                    notificationHelper.playNotificationDismissSound()
+                                }
+                            }
                             vibrationHelper.vibrate(400)
                             notificationHelper.cancelNotification(NOTIFICATION_REMINDER_ID)
                             localBroadcastManager.sendBroadcast(Intent(ACTION_GAZE_TIMER_COMPLETED))

@@ -17,7 +17,11 @@ class AboutViewModel : ViewModel() {
                 cardTitle = "Developer Info",
                 developerName = "Pramod S. Jantwal",
                 developerAndDesignLabel = "Design & developed by",
-                developerPicUrl = "https://avatars.githubusercontent.com/u/21077584?v=4"
+                developerPicUrl = "https://avatars.githubusercontent.com/u/21077584?v=4",
+                githubUrl = "http://www.github.com/pramod-sj",
+                facebookUrl = "http://www.facebook.com",
+                instagramUrl = "http://www.instagram.com",
+                gmailUrl = ""
             ), AboutUiItem.Support(
                 cardTitle = "Support", innerItems = listOf(
                     AboutInnerItem(

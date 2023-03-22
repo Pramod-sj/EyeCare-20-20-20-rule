@@ -24,6 +24,10 @@ class AboutAdapter(private val listener: AboutItemListener) :
 
     interface AboutItemListener {
         fun onItemClick(id: AboutInnerItemIdEnum, aboutInnerItem: AboutInnerItem)
+        fun onDevFacebookClick(url: String)
+        fun onDevInstagramClick(url: String)
+        fun onDevGithubClick(url: String)
+        fun onDevGmailClick(email: String)
     }
 
     override fun onCreateViewHolder(

@@ -10,4 +10,5 @@ data class SettingItem(
     val id: String,
     val title: String,
     val subTitle: String? = null,
+    val showSwitch: Boolean = false
 )

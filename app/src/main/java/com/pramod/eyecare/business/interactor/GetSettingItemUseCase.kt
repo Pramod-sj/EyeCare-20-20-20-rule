@@ -1,10 +1,14 @@
 package com.pramod.eyecare.business.interactor
 
+import com.pramod.eyecare.business.SettingPreference
 import com.pramod.eyecare.business.domain.SettingGroup
 import com.pramod.eyecare.business.domain.SettingItem
+import com.pramod.eyecare.framework.ui.settings.SettingItemEnum
 import javax.inject.Inject
 
-class GetSettingItemUseCase @Inject constructor() {
+class GetSettingItemUseCase @Inject constructor(
+    private val settingPreference: SettingPreference
+) {
 
     suspend operator fun invoke(): List<SettingGroup> {
         return listOf(
@@ -29,9 +33,10 @@ class GetSettingItemUseCase @Inject constructor() {
                         subTitle = "Change eye rest reminder notification settings",
                     ),
                     SettingItem(
-                        id = "id_play_work_sound",
-                        title = "Play work reminder",
+                        id = SettingItemEnum.PLAY_WORK_RINGTONE.id,
+                        title = "Play work reminder ringtone",
                         subTitle = "Turn on or off the work reminder notification sound",
+                        showSwitch = true
                     )
                 )
             ),
@@ -39,6 +44,11 @@ class GetSettingItemUseCase @Inject constructor() {
                 id = "id_others",
                 title = "Others",
                 items = listOf(
+                    SettingItem(
+                        id = SettingItemEnum.APP_NOT_WORKING_PROPERLY.id,
+                        title = "App not working properly",
+                        subTitle = "Not receiving notification or app not working properly, check how to fix it.",
+                    ),
                     SettingItem(
                         id = "id_about",
                         title = "About",

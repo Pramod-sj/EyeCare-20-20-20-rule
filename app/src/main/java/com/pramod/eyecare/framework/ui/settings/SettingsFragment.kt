@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -21,6 +22,8 @@ import com.pramod.eyecare.framework.ui.utils.applyMaterialAxisTransition
 import com.pramod.eyecare.framework.ui.utils.doWithInset
 import com.pramod.eyecare.framework.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.doubledot.doki.ui.DokiActivity
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings),
@@ -93,6 +96,16 @@ class SettingsFragment : Fragment(R.layout.fragment_settings),
                     startActivity(intent)
                 }
             }
+            SettingItemEnum.APP_NOT_WORKING_PROPERLY -> DokiActivity.start(context = requireContext())
+            else -> Unit
+        }
+    }
+
+    override fun onSwitchClick(enum: SettingItemEnum, isChecked: Boolean) {
+        Timber.d("onSwitchClick: $enum $isChecked")
+        when (enum) {
+            SettingItemEnum.PLAY_WORK_RINGTONE -> viewModel.togglePlayWorkRingtone()
+            else -> Unit
         }
     }
 

@@ -3,7 +3,6 @@ package com.pramod.eyecare.framework.view
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -13,14 +12,18 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.isVisible
 import androidx.core.widget.TextViewCompat
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.pramod.eyecare.R
 import com.pramod.eyecare.databinding.CustomItemLayoutBinding
 import com.pramod.eyecare.framework.ui.utils.getColorFromAttr
 
-class ITSCustomLayout
+class CustomLayout
     (context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
     private var customItsLayoutBinding: CustomItemLayoutBinding
+
+    val switch: MaterialSwitch
+        get() = customItsLayoutBinding.tailSwitch
 
     @DrawableRes
     var icon = -1
@@ -47,37 +50,37 @@ class ITSCustomLayout
         set(value) {
             field = value
             customItsLayoutBinding.txtViewCustomSubtitle.maxLines = value
-            invalidate()
         }
 
     var title: String = ""
         set(value) {
             field = value
             customItsLayoutBinding.txtViewCustomTitle.text = value
-            invalidate()
         }
 
     var subtitle: String? = null
         set(value) {
             field = value
             customItsLayoutBinding.txtViewCustomSubtitle.text = value
-            invalidate()
         }
 
     var isSubtitleVisible: Boolean = false
         set(value) {
             field = value
             customItsLayoutBinding.txtViewCustomSubtitle.isVisible = field
-            requestLayout()
         }
 
 
     var iconVisibility: Int = View.VISIBLE
         set(value) {
             field = value
-            Log.i("TAG", "isVisible: " + field)
             customItsLayoutBinding.itsFrameLayoutHead.visibility = value
-            invalidate()
+        }
+
+    var switchVisibility: Int = View.VISIBLE
+        set(value) {
+            field = value
+            customItsLayoutBinding.tailSwitch.visibility = value
         }
 
     private fun setIcon(
@@ -136,6 +139,12 @@ class ITSCustomLayout
             1 -> View.INVISIBLE
             else -> View.GONE
         }
+        switchVisibility =
+            when (a.getInt(R.styleable.ITSCustomLayout_switchVisibility, -1)) {
+                0 -> View.VISIBLE
+                1 -> View.INVISIBLE
+                else -> View.GONE
+            }
         a.recycle()
     }
 }
