@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.pramod.eyecare.R
 import com.pramod.eyecare.databinding.FragmentAboutBinding
+import com.pramod.eyecare.framework.ui.openWebsite
 import com.pramod.eyecare.framework.ui.utils.applyMaterialAxisTransition
 import com.pramod.eyecare.framework.ui.utils.doWithInset
 import com.pramod.eyecare.framework.ui.utils.viewBinding
@@ -67,6 +68,22 @@ class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemL
             AboutInnerItemIdEnum.TERM_AND_SERVICES -> {}
             AboutInnerItemIdEnum.PRIVACY_POLICY -> {}
         }
+    }
+
+    override fun onDevFacebookClick(url: String) {
+        openWebsite(url)
+    }
+
+    override fun onDevInstagramClick(url: String) {
+        openWebsite(url)
+    }
+
+    override fun onDevGithubClick(url: String) {
+        openWebsite(url)
+    }
+
+    override fun onDevGmailClick(email: String) {
+
     }
 
 }

@@ -14,6 +14,11 @@ sealed class AboutUiItem(val viewTypeEnum: Enum) {
         val developerName: String,
         val developerAndDesignLabel: String,
         val developerPicUrl: String,
+
+        val githubUrl: String,
+        val facebookUrl: String,
+        val instagramUrl: String,
+        val gmailUrl: String
     ) : AboutUiItem(Enum.DEVELOPER)
 
     data class Support(

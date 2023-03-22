@@ -17,6 +17,10 @@ class DeveloperViewHolderAbout(
         binding.tvDesignAndDevelopLabel.text = data.developerAndDesignLabel
         binding.tvDesignAndDevelopName.text = data.developerName
         binding.ivDevPicture.load(data.developerPicUrl)
+        binding.flFacebook.setOnClickListener { listener?.onDevFacebookClick(data.facebookUrl) }
+        binding.flInstagram.setOnClickListener { listener?.onDevInstagramClick(data.instagramUrl) }
+        binding.flGithub.setOnClickListener { listener?.onDevGithubClick(data.githubUrl) }
+        binding.flMail.setOnClickListener { listener?.onDevGmailClick(data.gmailUrl) }
     }
 
 
