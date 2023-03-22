@@ -3,7 +3,6 @@ package com.pramod.eyecare.framework.view
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -18,7 +17,7 @@ import com.pramod.eyecare.R
 import com.pramod.eyecare.databinding.CustomItemLayoutBinding
 import com.pramod.eyecare.framework.ui.utils.getColorFromAttr
 
-class ITSCustomLayout
+class CustomLayout
     (context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
     private var customItsLayoutBinding: CustomItemLayoutBinding
@@ -135,16 +134,17 @@ class ITSCustomLayout
         TextViewCompat.setTextAppearance(
             customItsLayoutBinding.txtViewCustomSubtitle, R.style.CustomLayoutSubtitleTextAppearance
         )
-        iconVisibility = when (a.getInt(R.styleable.ITSCustomLayout_iconVisibility, View.GONE)) {
+        iconVisibility = when (a.getInt(R.styleable.ITSCustomLayout_iconVisibility, 0)) {
             0 -> View.VISIBLE
             1 -> View.INVISIBLE
             else -> View.GONE
         }
-        switchVisibility = when (a.getInt(R.styleable.ITSCustomLayout_switchVisibility, 0)) {
-            0 -> View.VISIBLE
-            1 -> View.INVISIBLE
-            else -> View.GONE
-        }
+        switchVisibility =
+            when (a.getInt(R.styleable.ITSCustomLayout_switchVisibility, -1)) {
+                0 -> View.VISIBLE
+                1 -> View.INVISIBLE
+                else -> View.GONE
+            }
         a.recycle()
     }
 }
