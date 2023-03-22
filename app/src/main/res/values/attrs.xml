@@ -18,5 +18,13 @@
         <attr name="maxSubTitleLines" format="integer" />
         <attr name="titleTextAppearance" format="reference" />
         <attr name="subtitleTextAppearance" format="reference" />
+        <attr name="switchVisibility" format="integer">
+            <!-- Visible on screen; the default value. -->
+            <enum name="visible" value="0" />
+            <!-- Not displayed, but taken into account during layout (space is left for it). -->
+            <enum name="invisible" value="1" />
+            <!-- Completely hidden, as if the view had not been added. -->
+            <enum name="gone" value="2" />
+        </attr>
     </declare-styleable>
 </resources>

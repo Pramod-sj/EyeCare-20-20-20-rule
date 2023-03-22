@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.isVisible
 import androidx.core.widget.TextViewCompat
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.pramod.eyecare.R
 import com.pramod.eyecare.databinding.CustomItemLayoutBinding
 import com.pramod.eyecare.framework.ui.utils.getColorFromAttr
@@ -21,6 +22,9 @@ class ITSCustomLayout
     (context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
     private var customItsLayoutBinding: CustomItemLayoutBinding
+
+    val switch: MaterialSwitch
+        get() = customItsLayoutBinding.tailSwitch
 
     @DrawableRes
     var icon = -1
@@ -47,37 +51,37 @@ class ITSCustomLayout
         set(value) {
             field = value
             customItsLayoutBinding.txtViewCustomSubtitle.maxLines = value
-            invalidate()
         }
 
     var title: String = ""
         set(value) {
             field = value
             customItsLayoutBinding.txtViewCustomTitle.text = value
-            invalidate()
         }
 
     var subtitle: String? = null
         set(value) {
             field = value
             customItsLayoutBinding.txtViewCustomSubtitle.text = value
-            invalidate()
         }
 
     var isSubtitleVisible: Boolean = false
         set(value) {
             field = value
             customItsLayoutBinding.txtViewCustomSubtitle.isVisible = field
-            requestLayout()
         }
 
 
     var iconVisibility: Int = View.VISIBLE
         set(value) {
             field = value
-            Log.i("TAG", "isVisible: " + field)
             customItsLayoutBinding.itsFrameLayoutHead.visibility = value
-            invalidate()
+        }
+
+    var switchVisibility: Int = View.VISIBLE
+        set(value) {
+            field = value
+            customItsLayoutBinding.tailSwitch.visibility = value
         }
 
     private fun setIcon(
@@ -131,7 +135,12 @@ class ITSCustomLayout
         TextViewCompat.setTextAppearance(
             customItsLayoutBinding.txtViewCustomSubtitle, R.style.CustomLayoutSubtitleTextAppearance
         )
-        iconVisibility = when (a.getInt(R.styleable.ITSCustomLayout_iconVisibility, 0)) {
+        iconVisibility = when (a.getInt(R.styleable.ITSCustomLayout_iconVisibility, View.GONE)) {
+            0 -> View.VISIBLE
+            1 -> View.INVISIBLE
+            else -> View.GONE
+        }
+        switchVisibility = when (a.getInt(R.styleable.ITSCustomLayout_switchVisibility, 0)) {
             0 -> View.VISIBLE
             1 -> View.INVISIBLE
             else -> View.GONE
