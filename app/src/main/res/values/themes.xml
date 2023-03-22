@@ -35,6 +35,14 @@
         <item name="fontFamily">@font/google_sans_font_family</item>
     </style>
 
+    <style name="Theme.EyeCare202020RuleTheme.BottomSheetDialogFragmentStyle" parent="Theme.MaterialComponents.DayNight.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
     <style name="Theme.EyeCare202020Rule.FabService.Start" parent="Widget.Material3.FloatingActionButton.Large.Primary" />
 
     <style name="Theme.EyeCare202020Rule.FabService.Stop" parent="Theme.EyeCare202020Rule.FabService.Start">
@@ -75,4 +83,6 @@
         <item name="fontFamily">@font/googlesans_medium</item>
         <item name="android:fontFamily">@font/googlesans_medium</item>
     </style>
+
+
 </resources>

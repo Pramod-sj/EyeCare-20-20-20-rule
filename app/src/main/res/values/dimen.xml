@@ -12,4 +12,6 @@
     <dimen name="about_us_card_radius">10dp</dimen>
 
     <dimen name="about_us_card_social_button_size">24dp</dimen>
+
+    <dimen name="icon_size">24dp</dimen>
 </resources>
