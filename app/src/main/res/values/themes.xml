@@ -43,6 +43,12 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
+    <style name="Theme.EyeCare202020RuleTheme.FullScreenBottomSheetShape" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">15dp</item>
+        <item name="cornerSizeTopRight">15dp</item>
+    </style>
+
     <style name="Theme.EyeCare202020Rule.FabService.Start" parent="Widget.Material3.FloatingActionButton.Large.Primary" />
 
     <style name="Theme.EyeCare202020Rule.FabService.Stop" parent="Theme.EyeCare202020Rule.FabService.Start">

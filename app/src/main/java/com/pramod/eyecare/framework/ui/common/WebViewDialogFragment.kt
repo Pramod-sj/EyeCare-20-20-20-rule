@@ -13,6 +13,7 @@ import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
 import com.pramod.eyecare.R
 import com.pramod.eyecare.databinding.DialogWebviewLayoutBinding
+import com.pramod.eyecare.framework.ui.utils.isNetworkActive
 import com.pramod.eyecare.framework.ui.utils.viewBinding
 
 class WebViewDialogFragment :
@@ -27,7 +28,7 @@ class WebViewDialogFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (ThemeManager.isNightModeActive(requireContext())) {
+        if (!isLight) {
             try {
                 if (WebViewFeature.isFeatureSupported(WebViewFeature.FORCE_DARK)) {
                     WebSettingsCompat.setForceDark(
@@ -54,7 +55,7 @@ class WebViewDialogFragment :
                 super.onReceivedError(view, request, error)
                 binding.webView.isVisible = false
                 binding.txtViewErrorMessage.isVisible = true
-                if (!NetworkUtils.isNetworkActive(requireContext())) {
+                if (!requireContext().isNetworkActive()) {
                     binding.txtViewErrorMessage.text =
                         "Please connect to an active internet connection!"
                 } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
