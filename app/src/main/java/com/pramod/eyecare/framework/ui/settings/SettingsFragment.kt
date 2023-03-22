@@ -21,6 +21,7 @@ import com.pramod.eyecare.framework.ui.utils.applyMaterialAxisTransition
 import com.pramod.eyecare.framework.ui.utils.doWithInset
 import com.pramod.eyecare.framework.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dev.doubledot.doki.ui.DokiActivity
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings),
@@ -93,6 +94,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings),
                     startActivity(intent)
                 }
             }
+            SettingItemEnum.APP_NOT_WORKING_PROPERLY -> DokiActivity.start(context = requireContext())
         }
     }
 

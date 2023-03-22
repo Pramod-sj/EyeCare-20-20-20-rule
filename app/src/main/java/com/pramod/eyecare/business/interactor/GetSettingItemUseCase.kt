@@ -2,6 +2,7 @@ package com.pramod.eyecare.business.interactor
 
 import com.pramod.eyecare.business.domain.SettingGroup
 import com.pramod.eyecare.business.domain.SettingItem
+import com.pramod.eyecare.framework.ui.settings.SettingItemEnum
 import javax.inject.Inject
 
 class GetSettingItemUseCase @Inject constructor() {
@@ -39,6 +40,11 @@ class GetSettingItemUseCase @Inject constructor() {
                 id = "id_others",
                 title = "Others",
                 items = listOf(
+                    SettingItem(
+                        id = SettingItemEnum.APP_NOT_WORKING_PROPERLY.id,
+                        title = "App not working properly",
+                        subTitle = "Not receiving notification or app not working properly, check how to fix it.",
+                    ),
                     SettingItem(
                         id = "id_about",
                         title = "About",
