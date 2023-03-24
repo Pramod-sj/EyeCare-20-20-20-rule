@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.pramod.eyecare.R
+import com.pramod.eyecare.business.CopyHelper
 import com.pramod.eyecare.databinding.FragmentAboutBinding
+import com.pramod.eyecare.framework.ui.common.WebViewDialogFragment
 import com.pramod.eyecare.framework.ui.fragment.donate.DonateBottomDialogFragment
 import com.pramod.eyecare.framework.ui.fragment.showOpensourceLibLicense
 import com.pramod.eyecare.framework.ui.openWebsite
@@ -16,6 +18,7 @@ import com.pramod.eyecare.framework.ui.utils.applyMaterialAxisTransition
 import com.pramod.eyecare.framework.ui.utils.doWithInset
 import com.pramod.eyecare.framework.ui.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemListener {
@@ -23,6 +26,9 @@ class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemL
     private val binding by viewBinding<FragmentAboutBinding>()
 
     private val viewModel by viewModels<AboutViewModel>()
+
+    @Inject
+    lateinit var copyHelper: CopyHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +77,20 @@ class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemL
             AboutInnerItemIdEnum.OPEN_SOURCE_LIBRARIES -> {
                 showOpensourceLibLicense()
             }
-            AboutInnerItemIdEnum.TERM_AND_SERVICES -> {}
-            AboutInnerItemIdEnum.PRIVACY_POLICY -> {}
+            AboutInnerItemIdEnum.TERM_AND_SERVICES -> {
+                WebViewDialogFragment.show(
+                    copyHelper.getString(CopyHelper.TERM_AND_SERVICE) { "Term & Services" },
+                    "http://23.111.167.173/~todayswo/etc/term_and_condition_new.html",
+                    childFragmentManager
+                )
+            }
+            AboutInnerItemIdEnum.PRIVACY_POLICY -> {
+                WebViewDialogFragment.show(
+                    copyHelper.getString(CopyHelper.PRIVACY_POLICY) { "Privacy policy" },
+                    "http://23.111.167.173/~todayswo/etc/privacy_policy_new.html",
+                    childFragmentManager
+                )
+            }
         }
     }
 

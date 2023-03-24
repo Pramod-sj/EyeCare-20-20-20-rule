@@ -3,6 +3,8 @@ package com.pramod.eyecare.business
 interface CopyHelper {
 
     companion object {
+        const val PRIVACY_POLICY = "privacy_policy"
+        const val TERM_AND_SERVICE = "term_and_service"
         const val NOTIFICATION_WORKING_TITLE = "notification_working_title"
         const val NOTIFICATION_WORKING_BODY = "notification_working_body"
         const val NOTIFICATION_RESTING_TITLE = "notification_resting_title"

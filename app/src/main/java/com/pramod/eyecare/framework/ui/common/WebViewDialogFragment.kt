@@ -15,6 +15,7 @@ import com.pramod.eyecare.R
 import com.pramod.eyecare.databinding.DialogWebviewLayoutBinding
 import com.pramod.eyecare.framework.ui.utils.isNetworkActive
 import com.pramod.eyecare.framework.ui.utils.viewBinding
+import timber.log.Timber
 
 class WebViewDialogFragment :
     BaseBottomSheetDialogFragment(R.layout.dialog_webview_layout) {
@@ -43,10 +44,10 @@ class WebViewDialogFragment :
 
         binding.txtViewAppBar.text = arguments?.getString(EXTRA_DIALOG_TITLE)
         arguments?.getString(EXTRA_WEB_PAGE_URL)?.let {
+            Timber.d("URL:$it")
             binding.webView.loadUrl(it)
         }
         binding.webView.webViewClient = object : WebViewClient() {
-
             override fun onReceivedError(
                 view: WebView?,
                 request: WebResourceRequest?,
