@@ -6,6 +6,10 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+def keyPropertiesFile = rootProject.file("key.properties")
+def keyProperties = new Properties()
+keyProperties.load(new FileInputStream(keyPropertiesFile))
+
 android {
     namespace 'com.pramod.eyecare'
     compileSdk 33
@@ -21,6 +25,10 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        buildConfigField("String", "GOOGLE_LICENSE_KEY", keyProperties['GOOGLE_LICENSE_KEY'])
+        buildConfigField("String", "MERCHANT_ID", keyProperties['MERCHANT_ID'])
+        buildConfigField("String", "GOOGLE_IN_APP_RSA_KEY", keyProperties['GOOGLE_IN_APP_RSA_KEY'])
     }
 
     buildTypes {
@@ -111,4 +119,7 @@ dependencies {
     implementation('dev.doubledot.doki:library:0.0.1@aar') {
         transitive = true
     }
+
+    implementation "com.android.billingclient:billing-ktx:$billing_version"
+
 }

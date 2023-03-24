@@ -4,4 +4,6 @@
     <string name="exercise_20_20_20_rule">Look away from your computer at least every 20 minutes and gaze at a distant object
         (at least 20 feet away) for at least 20 seconds.
     </string>
+    <string name="support_development">Hello My Dear User, \nThis project is solely handled by me along with my other works thus adding new features takes weeks or months. \nThis app is completely free, donating a small amount will encourage me to keep this project alive.</string>
+    <string name="regards">Regards,</string>
 </resources>

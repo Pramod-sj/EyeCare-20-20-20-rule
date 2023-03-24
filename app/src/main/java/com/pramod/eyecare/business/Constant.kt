@@ -6,4 +6,6 @@ object Constant {
 
     const val GAZE_TIME: Long = 20 * 1000 // 20 seconds
 
+    const val COLOR_ALPHA_DONATE_ITEM = 10
+
 }

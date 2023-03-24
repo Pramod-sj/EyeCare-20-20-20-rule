@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.pramod.eyecare.R
 import com.pramod.eyecare.databinding.FragmentAboutBinding
+import com.pramod.eyecare.framework.ui.fragment.donate.DonateBottomDialogFragment
 import com.pramod.eyecare.framework.ui.openWebsite
 import com.pramod.eyecare.framework.ui.utils.applyMaterialAxisTransition
 import com.pramod.eyecare.framework.ui.utils.doWithInset
@@ -60,7 +61,9 @@ class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemL
     override fun onItemClick(id: AboutInnerItemIdEnum, aboutInnerItem: AboutInnerItem) {
         when (id) {
             AboutInnerItemIdEnum.FORK_ON_GITHUB -> {}
-            AboutInnerItemIdEnum.DONATE -> {}
+            AboutInnerItemIdEnum.DONATE -> {
+                DonateBottomDialogFragment.show(childFragmentManager)
+            }
             AboutInnerItemIdEnum.SHARE_APP -> {}
             AboutInnerItemIdEnum.RATE_US -> {}
             AboutInnerItemIdEnum.APP_LOGO_CREDIT -> {}

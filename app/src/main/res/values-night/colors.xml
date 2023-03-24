@@ -15,4 +15,14 @@
     <!--end Text Colors-->
 
     <color name="stroke_about_cards">#3E3D3D</color>
+
+    <!-- Start Donate Item Colors -->
+    <color name="color_cookie">@color/orange_200</color>
+    <color name="color_coffee">@color/green_200</color>
+    <color name="color_snacks">@color/purple_200</color>
+    <color name="color_gift">@color/pink_200</color>
+    <color name="color_server">@color/blue_200</color>
+    <color name="color_movie">@color/red_200</color>
+    <color name="color_meal">@color/deepOrange_200</color>
+    <!-- End Donate Item Colors -->
 </resources>

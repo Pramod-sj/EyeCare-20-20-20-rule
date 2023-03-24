@@ -7,9 +7,12 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.FloatRange
 import androidx.annotation.LayoutRes
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
@@ -18,6 +21,7 @@ import com.google.android.material.shape.ShapeAppearanceModel
 import com.pramod.eyecare.R
 import com.pramod.eyecare.framework.ui.utils.doWithInset
 import com.pramod.eyecare.framework.ui.utils.getColorFromAttr
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 
 abstract class BaseBottomSheetDialogFragment(@LayoutRes val layoutId: Int) :
@@ -52,7 +56,7 @@ abstract class BaseBottomSheetDialogFragment(@LayoutRes val layoutId: Int) :
      * close to 1 more than half expanded i.e. covering more screen
      */
     @FloatRange(from = 0.0, to = 1.0)
-    open fun peekHeightFactor(): Float {
+    fun peekHeightFactor(): Float {
         return 0.7f
     }
 
@@ -91,9 +95,7 @@ abstract class BaseBottomSheetDialogFragment(@LayoutRes val layoutId: Int) :
         bottomSheetBehavior = BottomSheetBehavior.from(getBottomSheetBehaviorView())
 
         val factorInPercentage = convertNumberRangeToAnotherRangeFromFloat(
-            peekHeightFactor(),
-            0f to 1f,
-            0f to 100f
+            peekHeightFactor(), 0f to 1f, 0f to 100f
         )
 
         val peekHeightInPixel =
@@ -108,37 +110,48 @@ abstract class BaseBottomSheetDialogFragment(@LayoutRes val layoutId: Int) :
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
+    private var prevStatusIconColorChanged: Boolean? = null
 
     private val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+
+        val heightToBeScrolled by lazy {
+            (view?.height ?: 0) - ((view?.height ?: 0) * peekHeightFactor())
+        }
+
+
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                 dismiss()
             }
-
             bottomSheetBehavior.isDraggable =
                 !lockBottomSheetDragWhenExpanded() && newState != BottomSheetBehavior.STATE_EXPANDED
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (isLight) {
-                    dialog?.window?.configStatusBar(
-                        makeLight = newState == BottomSheetBehavior.STATE_EXPANDED,
-                        R.color.white,
-                        true
-                    )
-                }
-
-            }
+            Timber.d("State; isLight:$isLight; newState:$newState")
 
             //dispatch stateChange updates to extending fragments
             this@BaseBottomSheetDialogFragment.onStateChanged(bottomSheet, newState)
         }
 
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            Timber.d("SlideOffset:$slideOffset: Height:$heightToBeScrolled")
+
             applyBackgroundDim(slideOffset)
 
             applyTopInset(slideOffset)
 
             applyRadiusBasedOnSlideOffset(slideOffset)
+
+            val isReachedStatusBar = ((1 - slideOffset) * heightToBeScrolled) <= topInset
+
+            Timber.d("isReachedStatusBar:$isReachedStatusBar")
+
+            if (isLight && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && prevStatusIconColorChanged != isReachedStatusBar) {
+                requireDialog().window?.let {
+                    prevStatusIconColorChanged = isReachedStatusBar
+                    setStatusBarLightTextNewApi(window = it, isLight = isReachedStatusBar)
+                }
+            }
 
             //dispatch onSlide updates to extending fragments
             this@BaseBottomSheetDialogFragment.onSlide(bottomSheet, slideOffset)
@@ -149,25 +162,22 @@ abstract class BaseBottomSheetDialogFragment(@LayoutRes val layoutId: Int) :
 
     open fun onSlide(bottomSheet: View, slideOffset: Float) {}
 
-
     private fun applyBackgroundDim(slideOffset: Float) {
-        view?.setBackgroundColor(
-            ColorUtils.setAlphaComponent(
-                Color.BLACK,
-                convertNumberRangeToAnotherRangeFromFloat(
-                    slideOffset,
-                    -1f to 1f,
-                    100f to 255f
-                ).toInt()
+        try {
+            view?.setBackgroundColor(
+                ColorUtils.setAlphaComponent(
+                    Color.BLACK, convertNumberRangeToAnotherRangeFromFloat(
+                        slideOffset, -1f to 1f, 100f to 170f
+                    ).toInt()
+                )
             )
-        )
+        } catch (_: Throwable) {
+        }
     }
 
     private fun applyTopInset(slideOffset: Float) {
         val topMargin = convertNumberRangeToAnotherRangeFromFloat(
-            slideOffset,
-            0.8f to 1f,
-            0f to topInset.toFloat()
+            slideOffset, 0.8f to 1f, 0f to topInset.toFloat()
         ).toInt()
         if (getBottomSheetBehaviorView() is MaterialCardView) {
             (getBottomSheetBehaviorView() as MaterialCardView).setContentPadding(
@@ -182,21 +192,16 @@ abstract class BaseBottomSheetDialogFragment(@LayoutRes val layoutId: Int) :
 
             val radiusInPixel = 35f
             val newCornerRadius = convertNumberRangeToAnotherRangeFromFloat(
-                slideOffset,
-                0.8f to 1f,
-                radiusInPixel to 0f
+                slideOffset, 0.8f to 1f, radiusInPixel to 0f
             )
 
-            val newShape: ShapeAppearanceModel = ShapeAppearanceModel.Builder()
-                .setTopLeftCorner(
-                    CornerFamily.ROUNDED,
-                    if (newCornerRadius > radiusInPixel) radiusInPixel else newCornerRadius.toFloat()
-                )
-                .setTopRightCorner(
-                    CornerFamily.ROUNDED,
-                    if (newCornerRadius > radiusInPixel) radiusInPixel else newCornerRadius.toFloat()
-                )
-                .build()
+            val newShape: ShapeAppearanceModel = ShapeAppearanceModel.Builder().setTopLeftCorner(
+                CornerFamily.ROUNDED,
+                if (newCornerRadius > radiusInPixel) radiusInPixel else newCornerRadius.toFloat()
+            ).setTopRightCorner(
+                CornerFamily.ROUNDED,
+                if (newCornerRadius > radiusInPixel) radiusInPixel else newCornerRadius.toFloat()
+            ).build()
             (getBottomSheetBehaviorView() as MaterialCardView).shapeAppearanceModel = newShape
         } else {
             Timber.e(
@@ -229,40 +234,12 @@ abstract class BaseBottomSheetDialogFragment(@LayoutRes val layoutId: Int) :
         newRange: Pair<Float, Float>,
     ): Float {
 
-        return ((oldValue - oldRange.first) / (oldRange.second - oldRange.first)) *
-                (newRange.second - newRange.first) +
-                newRange.first
+        return ((oldValue - oldRange.first) / (oldRange.second - oldRange.first)) * (newRange.second - newRange.first) + newRange.first
     }
 
-    fun Window.configStatusBar(
-        makeLight: Boolean,
-        statusBarColorResId: Int = -1,
-        matchingBackgroundColor: Boolean = false,
-    ) {
-        val oldFlags = decorView.systemUiVisibility
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            var flags = oldFlags
-            flags = if (makeLight) {
-                flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-            } else {
-                flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
-            }
-            decorView.systemUiVisibility = flags
-            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            statusBarColor = if (matchingBackgroundColor) {
-                context.getColorFromAttr(android.R.attr.windowBackground)
-            } else {
-                ContextCompat.getColor(
-                    requireContext(),
-                    if (statusBarColorResId != -1) statusBarColorResId
-                    else (if (makeLight) R.color.white else R.color.black)
-                )
-            }
-        } else {
-            statusBarColor = ContextCompat.getColor(
-                requireContext(),
-                R.color.black
-            )
+    private fun setStatusBarLightTextNewApi(window: Window, isLight: Boolean) {
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            isAppearanceLightStatusBars = isLight
         }
     }
 }
