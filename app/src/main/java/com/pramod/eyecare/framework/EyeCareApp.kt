@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.google.android.material.color.DynamicColors
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import timber.log.Timber.Forest.plant
@@ -31,5 +32,6 @@ class EyeCareApp : Application() {
                 super.log(priority, "global_tag_$tag", message, t)
             }
         })
+        DynamicColors.applyToActivitiesIfAvailable(this)
     }
 }
