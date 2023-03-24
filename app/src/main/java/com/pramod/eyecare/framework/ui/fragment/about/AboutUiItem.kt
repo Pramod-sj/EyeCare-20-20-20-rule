@@ -3,11 +3,20 @@ package com.pramod.eyecare.framework.ui.fragment.about
 sealed class AboutUiItem(val viewTypeEnum: Enum) {
 
     enum class Enum(val id: Int) {
+        APP(0),
         DEVELOPER(1),
         SUPPORT(2),
         CREDIT(3),
         OTHERS(4),
     }
+
+    data class AboutApp(
+        val appName: String,
+        val version: String,
+        val versionCode: String,
+        val changelogText: String,
+        val contactText: String
+    ) : AboutUiItem(Enum.APP)
 
     data class About(
         val cardTitle: String,

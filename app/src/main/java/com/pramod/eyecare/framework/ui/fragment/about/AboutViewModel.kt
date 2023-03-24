@@ -13,16 +13,14 @@ class AboutViewModel : ViewModel() {
 
     init {
         _aboutUiItems.value = listOf(
-            AboutUiItem.About(
-                cardTitle = "Developer Info",
-                developerName = "Pramod S. Jantwal",
-                developerAndDesignLabel = "Design & developed by",
-                developerPicUrl = "https://avatars.githubusercontent.com/u/21077584?v=4",
-                githubUrl = "http://www.github.com/pramod-sj",
-                facebookUrl = "http://www.facebook.com",
-                instagramUrl = "http://www.instagram.com",
-                gmailUrl = ""
-            ), AboutUiItem.Support(
+            AboutUiItem.AboutApp(
+                appName = "EyeCare Reminder",
+                version = "1.0.0",
+                versionCode = "20230324",
+                changelogText = "Changelog",
+                contactText = "Contact"
+            ),
+            AboutUiItem.Support(
                 cardTitle = "Support", innerItems = listOf(
                     AboutInnerItem(
                         AboutInnerItemIdEnum.FORK_ON_GITHUB,
@@ -37,25 +35,10 @@ class AboutViewModel : ViewModel() {
                         R.drawable.ic_donate
                     ),
                     AboutInnerItem(
-                        AboutInnerItemIdEnum.SHARE_APP,
-                        "Share",
-                        "Share with your friends and colleagues",
-                        R.drawable.ic_share
-                    ),
-                    AboutInnerItem(
                         AboutInnerItemIdEnum.RATE_US,
                         "Rate us",
                         "Take a moment to rate this app on Play Store",
                         R.drawable.ic_rate_review
-                    ),
-                )
-            ), AboutUiItem.Credit(
-                cardTitle = "Credit", innerItems = listOf(
-                    AboutInnerItem(
-                        AboutInnerItemIdEnum.APP_LOGO_CREDIT,
-                        "App logo",
-                        "App logo made by Freepik from Flaticon",
-                        R.drawable.ic_freepik
                     ),
                 )
             ), AboutUiItem.Others(

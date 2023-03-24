@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.pramod.eyecare.databinding.LayoutAboutAppInfoBinding
 import com.pramod.eyecare.databinding.LayoutAboutDeveloperInfoBinding
 import com.pramod.eyecare.databinding.LayoutSupportInfoBinding
 import com.pramod.eyecare.framework.ui.fragment.about.viewholder.*
@@ -28,6 +29,8 @@ class AboutAdapter(private val listener: AboutItemListener) :
         fun onDevInstagramClick(url: String)
         fun onDevGithubClick(url: String)
         fun onDevGmailClick(email: String)
+        fun onChangelogClick()
+        fun onContactClick()
     }
 
     override fun onCreateViewHolder(
@@ -36,6 +39,15 @@ class AboutAdapter(private val listener: AboutItemListener) :
     ): AboutBaseViewHolder<AboutUiItem> {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType.toAboutUiItemEnum()) {
+            AboutUiItem.Enum.APP -> {
+                AboutAppViewHolder(
+                    binding = LayoutAboutAppInfoBinding.inflate(
+                        /* inflater = */ layoutInflater,
+                        /* parent = */ parent,
+                        /* attachToParent = */ false
+                    )
+                )
+            }
             AboutUiItem.Enum.DEVELOPER -> {
                 DeveloperViewHolderAbout(
                     binding = LayoutAboutDeveloperInfoBinding.inflate(

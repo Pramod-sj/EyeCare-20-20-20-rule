@@ -50,7 +50,7 @@ class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemL
     }
 
     private fun setUpToolbar() {
-        binding.inclAppBar.toolbar.title = "About us"
+        binding.inclAppBar.toolbar.title = "About"
         binding.inclAppBar.toolbar.navigationIcon =
             ContextCompat.getDrawable(requireContext(), R.drawable.ic_round_keyboard_backspace_24)
         binding.inclAppBar.toolbar.setNavigationOnClickListener {
@@ -86,6 +86,14 @@ class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemL
     }
 
     override fun onDevGmailClick(email: String) {
+
+    }
+
+    override fun onChangelogClick() {
+
+    }
+
+    override fun onContactClick() {
 
     }
 
