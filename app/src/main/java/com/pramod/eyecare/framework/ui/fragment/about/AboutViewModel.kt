@@ -23,22 +23,22 @@ class AboutViewModel : ViewModel() {
             AboutUiItem.Support(
                 cardTitle = "Support", innerItems = listOf(
                     AboutInnerItem(
-                        AboutInnerItemIdEnum.FORK_ON_GITHUB,
-                        "Fork on github",
-                        "View source code or fork on github",
-                        R.drawable.ic_source_fork
+                        id = AboutInnerItemIdEnum.FORK_ON_GITHUB,
+                        title = "Fork on github",
+                        iconRes = R.drawable.ic_source_fork,
+                        subtitle = "Let grow together by forking us on github"
                     ),
                     AboutInnerItem(
-                        AboutInnerItemIdEnum.DONATE,
-                        "Donate",
-                        "Like my work?",
-                        R.drawable.ic_donate
+                        id = AboutInnerItemIdEnum.DONATE,
+                        title = "Donate",
+                        subtitle = "Like my work?",
+                        iconRes = R.drawable.ic_donate,
                     ),
                     AboutInnerItem(
-                        AboutInnerItemIdEnum.RATE_US,
-                        "Rate us",
-                        "Take a moment to rate this app on Play Store",
-                        R.drawable.ic_rate_review
+                        id = AboutInnerItemIdEnum.RATE_US,
+                        title = "Rate us",
+                        iconRes = R.drawable.ic_rate_review,
+                        subtitle = "Take some time to rate and review me on play store"
                     ),
                 )
             ), AboutUiItem.Others(
