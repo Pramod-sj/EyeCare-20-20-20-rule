@@ -6,4 +6,25 @@
     </string>
     <string name="support_development">Hello My Dear User, \nThis project is solely handled by me along with my other works thus adding new features takes weeks or months. \nThis app is completely free, donating a small amount will encourage me to keep this project alive.</string>
     <string name="regards">Regards,</string>
+
+
+    <!--libraries names-->
+    <string name="lib_android_lifecycle"><a href="https://developer.android.com/jetpack/androidx/releases/lifecycle">Android Lifecycle</a>  from Jetpack</string>
+    <string name="lib_in_app_billing"><a href="https://www.github.com/anjlab/android-inapp-billing-v3">Android In-App Billing V3 Library</a> by Anjlab</string>
+    <string name="lib_firebase_messaging"><a href="https://www.firebase.google.com/docs/cloud-messaging">Firebase messaging</a></string>
+    <string name="lib_autostarter"><a href="https://www.github.com/material-components/material-components-android">Material Components Library</a></string>
+    <string name="lib_material"><a href="https://www.github.com/judemanutd/AutoStarter">Autostarter</a> by Judemanutd</string>
+    <string name="lib_doki"><a href="https://github.com/doubledotlabs/doki">Doki</a> by doubledotlabs</string>
+    <string name="did_you_know">Did you know?</string>
+    <string name="meun_share_word">Share word</string>
+    <string-array name="libraries_name">
+        <item>@string/lib_android_lifecycle</item>
+        <item>@string/lib_in_app_billing</item>
+        <item>@string/lib_firebase_messaging</item>
+        <item>@string/lib_autostarter</item>
+        <item>@string/lib_material</item>
+        <item>@string/lib_doki</item>
+    </string-array>
+    <!--end-->
+
 </resources>

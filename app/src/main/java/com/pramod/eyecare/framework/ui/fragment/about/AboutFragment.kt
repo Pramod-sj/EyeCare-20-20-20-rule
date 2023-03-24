@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.pramod.eyecare.R
 import com.pramod.eyecare.databinding.FragmentAboutBinding
 import com.pramod.eyecare.framework.ui.fragment.donate.DonateBottomDialogFragment
+import com.pramod.eyecare.framework.ui.fragment.showOpensourceLibLicense
 import com.pramod.eyecare.framework.ui.openWebsite
 import com.pramod.eyecare.framework.ui.utils.applyMaterialAxisTransition
 import com.pramod.eyecare.framework.ui.utils.doWithInset
@@ -67,7 +68,9 @@ class AboutFragment : Fragment(R.layout.fragment_about), AboutAdapter.AboutItemL
             AboutInnerItemIdEnum.SHARE_APP -> {}
             AboutInnerItemIdEnum.RATE_US -> {}
             AboutInnerItemIdEnum.APP_LOGO_CREDIT -> {}
-            AboutInnerItemIdEnum.OPEN_SOURCE_LIBRARIES -> {}
+            AboutInnerItemIdEnum.OPEN_SOURCE_LIBRARIES -> {
+                showOpensourceLibLicense()
+            }
             AboutInnerItemIdEnum.TERM_AND_SERVICES -> {}
             AboutInnerItemIdEnum.PRIVACY_POLICY -> {}
         }
