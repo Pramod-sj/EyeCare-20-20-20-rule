@@ -9,6 +9,7 @@ import android.os.IBinder
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.pramod.eyecare.R
 import com.pramod.eyecare.business.Constant.ALARM_TIME_INTERVAL_202020_RULE
 import com.pramod.eyecare.business.Constant.GAZE_TIME
 import com.pramod.eyecare.business.domain.data.network.CopyHelper
@@ -142,7 +143,9 @@ class EyeCarePersistentForegroundService : LifecycleService(), NotificationActio
         lifecycleScope.launch {
             startForeground(
                 NOTIFICATION_ID, notificationHelper.buildNotification(
-                    title = copyHelper.getString(NOTIFICATION_WORKING_TITLE) { "EyeCare service is running" },
+                    title = copyHelper.getString(NOTIFICATION_WORKING_TITLE) {
+                        "{{app_name}} service is running"
+                    }.replace("{{app_name}}", resources.getString(R.string.app_name)),
                     desc = copyHelper.getString(NOTIFICATION_WORKING_BODY) { "Please don't remove this notification its important for correct functioning!" },
                     pendingIntent = Intent(baseContext, MainActivity::class.java)
                         .toActivityPendingIntent(
