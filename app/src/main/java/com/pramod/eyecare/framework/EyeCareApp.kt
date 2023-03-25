@@ -32,6 +32,6 @@ class EyeCareApp : Application() {
                 super.log(priority, "global_tag_$tag", message, t)
             }
         })
-        //DynamicColors.applyToActivitiesIfAvailable(this)
+        DynamicColors.applyToActivitiesIfAvailable(this)
     }
 }
