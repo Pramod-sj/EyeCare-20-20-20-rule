@@ -1,7 +1,7 @@
-package com.pramod.eyecare.framework.datasource
+package com.pramod.eyecare.framework.datasource.remote.impl
 
-import com.pramod.eyecare.business.CopyHelper
-import com.pramod.eyecare.business.RemoteConfig
+import com.pramod.eyecare.business.domain.data.network.CopyHelper
+import com.pramod.eyecare.business.domain.data.network.RemoteConfig
 import com.pramod.eyecare.business.domain.data.network.GetSettingRemoteConfig
 import com.pramod.eyecare.business.domain.model.SettingGroup
 import com.pramod.eyecare.business.domain.model.SettingItem

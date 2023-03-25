@@ -1,4 +1,4 @@
-package com.pramod.eyecare.business
+package com.pramod.eyecare.business.domain.data.network
 
 interface CopyHelper {
 

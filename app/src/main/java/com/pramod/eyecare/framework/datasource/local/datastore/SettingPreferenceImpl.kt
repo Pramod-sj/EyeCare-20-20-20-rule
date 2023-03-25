@@ -1,9 +1,9 @@
-package com.pramod.eyecare.framework.datasource
+package com.pramod.eyecare.framework.datasource.local.datastore
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import com.pramod.eyecare.business.SettingPreference
+import com.pramod.eyecare.business.domain.data.preference.SettingPreference
 import com.pramod.eyecare.framework.appDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow

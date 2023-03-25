@@ -1,6 +1,6 @@
 package com.pramod.eyecare.business.interactor
 
-import com.pramod.eyecare.business.RemoteConfig
+import com.pramod.eyecare.business.domain.data.network.RemoteConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

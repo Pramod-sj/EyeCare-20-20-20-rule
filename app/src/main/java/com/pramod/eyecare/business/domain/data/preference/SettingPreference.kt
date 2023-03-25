@@ -1,4 +1,4 @@
-package com.pramod.eyecare.business
+package com.pramod.eyecare.business.domain.data.preference
 
 import kotlinx.coroutines.flow.Flow
 

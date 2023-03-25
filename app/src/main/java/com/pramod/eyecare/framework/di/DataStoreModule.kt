@@ -1,10 +1,14 @@
 package com.pramod.eyecare.framework.di
 
 import com.pramod.eyecare.business.*
-import com.pramod.eyecare.framework.impl.ScheduledAlarmCacheImpl
-import com.pramod.eyecare.framework.datasource.CopyHelperImpl
-import com.pramod.eyecare.framework.datasource.RemoteConfigImpl
-import com.pramod.eyecare.framework.datasource.SettingPreferenceImpl
+import com.pramod.eyecare.business.domain.data.network.CopyHelper
+import com.pramod.eyecare.business.domain.data.network.RemoteConfig
+import com.pramod.eyecare.business.domain.data.preference.ScheduledAlarmCache
+import com.pramod.eyecare.business.domain.data.preference.SettingPreference
+import com.pramod.eyecare.framework.datasource.local.datastore.ScheduledAlarmCacheImpl
+import com.pramod.eyecare.framework.datasource.remote.impl.CopyHelperImpl
+import com.pramod.eyecare.framework.datasource.remote.firebase.RemoteConfigImpl
+import com.pramod.eyecare.framework.datasource.local.datastore.SettingPreferenceImpl
 import com.pramod.eyecare.framework.ui.EyeCareUiCountDownTimerImpl
 import dagger.Binds
 import dagger.Module

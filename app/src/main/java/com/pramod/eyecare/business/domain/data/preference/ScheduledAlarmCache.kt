@@ -1,6 +1,5 @@
-package com.pramod.eyecare.business
+package com.pramod.eyecare.business.domain.data.preference
 
-import com.pramod.eyecare.framework.impl.ScheduledAlarmCacheImpl
 import kotlinx.coroutines.flow.Flow
 
 
@@ -19,7 +18,7 @@ interface ScheduledAlarmCache {
 
     fun getScheduledAlarmData(): Flow<AlarmData?>
 
-    suspend fun setAlarmData(alarmData: AlarmData)
+    suspend fun storeAlarmData(alarmData: AlarmData)
 
     suspend fun remove()
 }

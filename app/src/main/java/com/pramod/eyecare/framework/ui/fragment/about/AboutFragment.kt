@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.pramod.eyecare.R
-import com.pramod.eyecare.business.CopyHelper
+import com.pramod.eyecare.business.domain.data.network.CopyHelper
 import com.pramod.eyecare.databinding.FragmentAboutBinding
 import com.pramod.eyecare.framework.ui.common.WebViewDialogFragment
 import com.pramod.eyecare.framework.ui.fragment.donate.DonateBottomDialogFragment

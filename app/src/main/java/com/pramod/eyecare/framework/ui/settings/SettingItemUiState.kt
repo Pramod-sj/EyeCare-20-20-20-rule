@@ -1,6 +1,6 @@
 package com.pramod.eyecare.framework.ui.settings
 
-import com.pramod.eyecare.business.SettingPreference
+import com.pramod.eyecare.business.domain.data.preference.SettingPreference
 import com.pramod.eyecare.business.domain.model.SettingGroup
 import com.pramod.eyecare.business.domain.model.SettingItem
 import com.pramod.eyecare.business.domain.model.SettingItemEnum

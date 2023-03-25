@@ -1,11 +1,11 @@
-package com.pramod.eyecare.framework.datasource
+package com.pramod.eyecare.framework.datasource.remote.firebase
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.pramod.eyecare.R
-import com.pramod.eyecare.business.RemoteConfig
+import com.pramod.eyecare.business.domain.data.network.RemoteConfig
 import com.pramod.eyecare.framework.datasource.model.SettingGroupEntity
 import javax.inject.Inject
 import kotlin.coroutines.resume

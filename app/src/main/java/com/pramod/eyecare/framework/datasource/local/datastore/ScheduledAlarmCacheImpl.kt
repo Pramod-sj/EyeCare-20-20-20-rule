@@ -1,10 +1,10 @@
-package com.pramod.eyecare.framework.impl
+package com.pramod.eyecare.framework.datasource.local.datastore
 
 import android.content.Context
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.gson.Gson
-import com.pramod.eyecare.business.ScheduledAlarmCache
+import com.pramod.eyecare.business.domain.data.preference.ScheduledAlarmCache
 import com.pramod.eyecare.framework.appDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +29,7 @@ class ScheduledAlarmCacheImpl @Inject constructor(
         }
     }
 
-    override suspend fun setAlarmData(alarmData: ScheduledAlarmCache.AlarmData) {
+    override suspend fun storeAlarmData(alarmData: ScheduledAlarmCache.AlarmData) {
         withContext(Dispatchers.IO) {
             context.appDataStore.edit { pref ->
                 pref[scheduleAlarmDataKey] = gson.toJson(alarmData)

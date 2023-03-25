@@ -11,7 +11,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.pramod.eyecare.business.PersistentAlarmScheduler
 import com.pramod.eyecare.business.PersistentAlarmScheduler.Companion.ACTION_ON_ALARM_RECEIVE
-import com.pramod.eyecare.business.ScheduledAlarmCache
+import com.pramod.eyecare.business.domain.data.preference.ScheduledAlarmCache
 import com.pramod.eyecare.framework.service.EyeCarePersistentForegroundService.Companion.ACTION_GAZE_TIMER_COMPLETED
 import com.pramod.eyecare.framework.ui.utils.MyObserver
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -67,7 +67,7 @@ class PersistentAlarmSchedulerImpl @Inject constructor(
                     withContext(Dispatchers.IO) {
                         scheduledAlarmCache.getScheduledAlarmData().firstOrNull()
                             ?.let { alarmData ->
-                                scheduledAlarmCache.setAlarmData(alarmData.copy(wasCompleted = true))
+                                scheduledAlarmCache.storeAlarmData(alarmData.copy(wasCompleted = true))
                             }
                         listeners.forEach { it.onAlarmReceived() }
                     }
@@ -86,7 +86,7 @@ class PersistentAlarmSchedulerImpl @Inject constructor(
     override suspend fun schedule(triggerAtMillis: Long, interval: Long, repeat: Boolean) {
         withContext(Dispatchers.IO) {
             Timber.d("scheduleAlarm: new")
-            scheduledAlarmCache.setAlarmData(
+            scheduledAlarmCache.storeAlarmData(
                 ScheduledAlarmCache.AlarmData(
                     triggerAtMillis = triggerAtMillis,
                     repeat = repeat,
@@ -117,7 +117,7 @@ class PersistentAlarmSchedulerImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             Timber.d("stopAlarms:cancel")
             scheduledAlarmCache.getScheduledAlarmData().firstOrNull()?.let { data ->
-                scheduledAlarmCache.setAlarmData(alarmData = data.copy(wasCancelled = true))
+                scheduledAlarmCache.storeAlarmData(alarmData = data.copy(wasCancelled = true))
             }
             alarmPendingIntent?.let { alarmManager.cancel(alarmPendingIntent) }
         }
