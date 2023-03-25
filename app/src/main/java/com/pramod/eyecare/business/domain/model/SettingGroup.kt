@@ -1,4 +1,4 @@
-package com.pramod.eyecare.business.domain
+package com.pramod.eyecare.business.domain.model
 
 data class SettingGroup(
     val id: String,

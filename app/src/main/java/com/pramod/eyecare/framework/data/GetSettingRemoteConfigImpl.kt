@@ -2,20 +2,20 @@ package com.pramod.eyecare.framework.data
 
 import com.pramod.eyecare.business.CopyHelper
 import com.pramod.eyecare.business.RemoteConfig
-import com.pramod.eyecare.business.domain.SettingGroup
-import com.pramod.eyecare.business.domain.SettingItem
-import com.pramod.eyecare.business.domain.toSettingItemEnum
+import com.pramod.eyecare.business.domain.data.network.GetSettingRemoteConfig
+import com.pramod.eyecare.business.domain.model.SettingGroup
+import com.pramod.eyecare.business.domain.model.SettingItem
+import com.pramod.eyecare.business.domain.model.toSettingItemEnum
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
-class GetSettingEndpoint @Inject constructor(
+class GetSettingRemoteConfigImpl @Inject constructor(
     private val remoteConfig: RemoteConfig,
     private val copyHelper: CopyHelper
-) {
-
-    suspend operator fun invoke(): List<SettingGroup> {
+) : GetSettingRemoteConfig {
+    override suspend fun invoke(): List<SettingGroup> {
         return withContext(Dispatchers.IO) {
             remoteConfig.getSettings().map { entity ->
                 Timber.d("Data:$entity")
@@ -34,5 +34,4 @@ class GetSettingEndpoint @Inject constructor(
             }
         }
     }
-
 }

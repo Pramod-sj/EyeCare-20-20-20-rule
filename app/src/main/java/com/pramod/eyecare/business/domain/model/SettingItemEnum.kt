@@ -1,4 +1,4 @@
-package com.pramod.eyecare.business.domain
+package com.pramod.eyecare.business.domain.model
 
 enum class SettingItemEnum(val id: String) {
     RATE_APP("id_rate_app"),

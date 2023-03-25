@@ -1,8 +1,6 @@
 package com.pramod.eyecare.framework.ui.settings
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +8,12 @@ import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.pramod.eyecare.business.SettingPreference
-import com.pramod.eyecare.business.domain.SettingGroup
-import com.pramod.eyecare.business.domain.SettingItem
-import com.pramod.eyecare.business.domain.SettingItemEnum
+import com.pramod.eyecare.business.domain.model.SettingItem
+import com.pramod.eyecare.business.domain.model.SettingItemEnum
 import com.pramod.eyecare.databinding.ItemSettingsLayoutBinding
 import com.pramod.eyecare.databinding.LayoutCardSettingGroupBinding
 import com.pramod.eyecare.framework.helper.HapticTouchListener
 import com.pramod.eyecare.framework.view.setUpListAdapter
-import timber.log.Timber
 
 private val SettingGroupItemComparator = object : DiffUtil.ItemCallback<SettingGroupUiState>() {
     override fun areItemsTheSame(

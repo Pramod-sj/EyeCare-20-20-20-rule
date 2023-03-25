@@ -1,12 +1,9 @@
 package com.pramod.eyecare.framework.ui.fragment.home
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.pramod.eyecare.business.EyeCareUiCountDownTimer
-import com.pramod.eyecare.business.GetRandomEyeCareTip
-import com.pramod.eyecare.business.RemoteConfig
+import com.pramod.eyecare.business.interactor.GetRandomEyeCareTipUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
@@ -14,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val eyeCareUiCountDownTimer: EyeCareUiCountDownTimer,
-    private val getRandomEyeCareTip: GetRandomEyeCareTip
+    private val getRandomEyeCareTipUseCase: GetRandomEyeCareTipUseCase
 ) : ViewModel() {
 
     private val _isServiceRunning = MutableStateFlow(false)
@@ -22,7 +19,7 @@ class HomeViewModel @Inject constructor(
 
     val uiAlarmStateTimer = eyeCareUiCountDownTimer.getCountDownTimerData().asLiveData()
 
-    val tip = getRandomEyeCareTip().asLiveData()
+    val tip = getRandomEyeCareTipUseCase().asLiveData()
 
     private val _startTime = MutableStateFlow<Long?>(null)
     val startTime = _startTime.asLiveData()

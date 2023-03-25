@@ -1,15 +1,15 @@
-package com.pramod.eyecare.business
+package com.pramod.eyecare.business.interactor
 
+import com.pramod.eyecare.business.RemoteConfig
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.isActive
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
-class GetRandomEyeCareTip @Inject constructor(private val remoteConfig: RemoteConfig) {
+class GetRandomEyeCareTipUseCase @Inject constructor(private val remoteConfig: RemoteConfig) {
 
     operator fun invoke(): Flow<String> {
         return flow {
