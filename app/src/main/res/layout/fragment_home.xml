@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true">
 
     <include
@@ -55,11 +56,11 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_tip"
+                style="@style/Widget.Material3.CardView.Filled"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginVertical="10dp"
-                app:cardBackgroundColor="?attr/colorSecondaryContainer"
                 app:cardElevation="0dp"
                 app:contentPadding="16dp"
                 app:layout_constraintTop_toBottomOf="@id/cl_body"
@@ -74,15 +75,16 @@
                         android:id="@+id/tv_tip_label"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/ic_tips"
-                        android:tint="?colorOnSecondaryContainer" />
+                        app:tint="?colorOnSurfaceVariant"
+                        android:src="@drawable/ic_tips" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_tips"
+                        tools:text="You bluecut lenses"
+                        android:textColor="?colorOnSurfaceVariant"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/padding_small"
-                        android:textColor="?colorOnSecondaryContainer"
                         app:layout_constraintBottom_toTopOf="@id/fab_start_service" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
