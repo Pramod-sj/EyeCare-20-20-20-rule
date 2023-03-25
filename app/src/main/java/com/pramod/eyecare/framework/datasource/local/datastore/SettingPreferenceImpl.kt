@@ -19,7 +19,7 @@ class SettingPreferenceImpl @Inject constructor(
     private val playWorkRingtoneBoolean = booleanPreferencesKey(SettingPreference.KEY_PLAY_RINGTONE)
 
     override fun getPlayWorkRingtone(): Flow<Boolean> {
-        return dataStore.data.map { it[playWorkRingtoneBoolean] ?: false }
+        return dataStore.data.map { it[playWorkRingtoneBoolean] ?: true }
     }
 
     override suspend fun setPlayWorkRingtone(play: Boolean) {
