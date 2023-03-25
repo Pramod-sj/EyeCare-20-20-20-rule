@@ -1,7 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <defaults>
-  <entry>
-    <key>eye_care_tips</key>
-    <value>["Blink often to refresh your eyes.","Check the lighting and reduce glare.","Adjust your monitor","Take eye breaks."]</value>
-  </entry>
+    <entry>
+        <key>translations_en</key>
+        <value>{
+            "privacy_policy": "Privacy policy",
+            "term_and_service": "Terms &amp; Services",
+            "notification_working_title": "",
+            "notification_working_body": "",
+            "notification_resting_title": "",
+            "notification_resting_body": "",
+            "notification_action_stop": "",
+            "notification_action_dont_remind": "",
+            "notification_action_dismiss": "",
+            "setting_grp_notification_title": "Notification",
+            "setting_item_notification_title": "Eye rest notification",
+            "setting_item_notification_desc": "Change eye rest reminder notification settings",
+            "setting_item_play_work_ringtone_title": "Play work reminder ringtone",
+            "setting_item_play_work_ringtone_desc": "Turn on or off the work reminder notification
+            sound",
+            "setting_item_app_not_working_title": "App not functioning",
+            "setting_grp_other_title": "Others",
+            "setting_item_app_not_working_desc": "Not receiving notification or app not working
+            properly, check how to fix it.",
+            "setting_about_title": "About",
+            "setting_about_desc": "Developer, support, license &amp; others"
+            }
+        </value>
+    </entry>
+    <entry>
+        <key>eye_care_tips</key>
+        <value>["Blink often to refresh your eyes.","Check the lighting and reduce glare.","Adjust
+            your monitor","Take eye breaks."]
+        </value>
+    </entry>
+    <entry>
+        <key>settings</key>
+        <value>[
+            {
+            "id": "id_notification_grp",
+            "titleKey": "setting_grp_notification_title",
+            "items": [
+            {
+            "id": "id_setting",
+            "titleKey": "setting_item_notification_title",
+            "subtitleKey": "setting_item_notification_desc",
+            "showSwitch": false
+            },
+            {
+            "id": "id_play_work_ringtone",
+            "titleKey": "setting_item_play_work_ringtone_title",
+            "subtitleKey": "setting_item_play_work_ringtone_desc",
+            "showSwitch": true
+            }
+            ]
+            },
+            {
+            "id": "id_others_grp",
+            "titleKey": "setting_grp_others_title",
+            "items": [
+            {
+            "id": "id_app_not_working",
+            "titleKey": "setting_item_app_not_working_title",
+            "subtitleKey": "setting_item_app_not_working_desc",
+            "showSwitch": false
+            },
+            {
+            "id": "id_about",
+            "titleKey": "setting_about_title",
+            "subtitleKey": "setting_about_desc",
+            "showSwitch": false
+            }
+            ]
+            }
+            ]
+        </value>
+    </entry>
 </defaults>

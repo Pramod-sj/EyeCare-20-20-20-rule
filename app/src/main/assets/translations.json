@@ -1,0 +1,21 @@
+{
+  "privacy_policy": "Privacy policy",
+  "term_and_service": "Terms & Services",
+  "notification_working_title": "",
+  "notification_working_body": "",
+  "notification_resting_title": "",
+  "notification_resting_body": "",
+  "notification_action_stop": "",
+  "notification_action_dont_remind": "",
+  "notification_action_dismiss": "",
+  "setting_grp_notification_title": "Notification",
+  "setting_item_notification_title": "Eye rest notification",
+  "setting_item_notification_desc": "Change eye rest reminder notification settings",
+  "setting_item_play_work_ringtone_title": "Play work reminder ringtone",
+  "setting_item_play_work_ringtone_desc": "Turn on or off the work reminder notification sound",
+  "setting_item_app_not_working_title": "App not functioning",
+  "setting_item_app_not_working_desc": "Not receiving notification or app not working properly, check how to fix it.",
+  "setting_about_title": "About",
+  "setting_about_desc": "Developer, support, license & others",
+  "setting_grp_others_title": "Others"
+}

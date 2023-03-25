@@ -51,27 +51,21 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_changelog"
-                style="@style/Widget.Material3.Button.UnelevatedButton"
+                style="@style/Widget.Material3.Button.TonalButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:text="Changelog"
-                android:textColor="?colorOnPrimaryContainer"
-                app:backgroundTint="?colorPrimaryInverse"
-                app:icon="@drawable/ic_changelog"
-                app:iconTint="?colorOnPrimaryContainer" />
+                app:icon="@drawable/ic_changelog" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_support"
-                style="@style/Widget.Material3.Button.UnelevatedButton"
+                style="@style/Widget.Material3.Button.TonalButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:text="Contact"
-                android:textColor="?colorOnPrimaryContainer"
-                app:backgroundTint="?colorPrimaryInverse"
-                app:icon="@drawable/ic_support"
-                app:iconTint="?colorOnPrimaryContainer" />
+                app:icon="@drawable/ic_support" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

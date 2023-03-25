@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.pramod.eyecare.business.SettingPreference
 import com.pramod.eyecare.business.domain.SettingGroup
 import com.pramod.eyecare.business.domain.SettingItem
+import com.pramod.eyecare.business.domain.SettingItemEnum
 import com.pramod.eyecare.databinding.ItemSettingsLayoutBinding
 import com.pramod.eyecare.databinding.LayoutCardSettingGroupBinding
 import com.pramod.eyecare.framework.helper.HapticTouchListener
@@ -90,7 +91,7 @@ class SettingsAdapter(
                         rowBinding.item.switch.setOnTouchListener(HapticTouchListener())
                         rowBinding.item.switch.setOnClickListener {
                             onSettingItemClickListener.onSwitchClick(
-                                settingItem.id.toSettingItemEnum(), rowBinding.item.switch.isChecked
+                                settingItem.id, rowBinding.item.switch.isChecked
                             )
                         }
                         rowBinding.item.setOnClickListener {

@@ -14,6 +14,6 @@ interface CopyHelper {
         const val NOTIFICATION_ACTION_DISMISS = "notification_action_dismiss"
     }
 
-    fun getString(key: String, defaultKey: () -> String): String
+    fun getString(key: String, defaultKey: () -> String = { "-" }): String
 
 }

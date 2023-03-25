@@ -16,6 +16,7 @@ import com.google.android.material.elevation.ElevationOverlayProvider
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.pramod.eyecare.R
 import com.pramod.eyecare.business.domain.SettingItem
+import com.pramod.eyecare.business.domain.SettingItemEnum
 import com.pramod.eyecare.databinding.FragmentSettingsBinding
 import com.pramod.eyecare.framework.helper.NotificationHelper
 import com.pramod.eyecare.framework.ui.utils.applyMaterialAxisTransition
@@ -74,7 +75,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings),
     }
 
     override fun onItemClick(position: Int, settingItem: SettingItem) {
-        when (settingItem.id.toSettingItemEnum()) {
+        when (settingItem.id) {
             SettingItemEnum.RATE_APP -> {
 
             }

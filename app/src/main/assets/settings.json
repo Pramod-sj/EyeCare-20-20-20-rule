@@ -1,0 +1,40 @@
+{
+  "settings": [
+    {
+      "id": "id_notification_grp",
+      "titleKey": "setting_grp_notification_title",
+      "items": [
+        {
+          "id": "id_setting",
+          "titleKey": "setting_item_notification_title",
+          "subtitleKey": "setting_item_notification_desc",
+          "showSwitch": false
+        },
+        {
+          "id": "id_play_work_ringtone",
+          "titleKey": "setting_item_play_work_ringtone_title",
+          "subtitleKey": "setting_item_play_work_ringtone_desc",
+          "showSwitch": true
+        }
+      ]
+    },
+    {
+      "id": "id_others_grp",
+      "titleKey": "setting_grp_others_title",
+      "items": [
+        {
+          "id": "id_app_not_working",
+          "titleKey": "setting_item_app_not_working_title",
+          "subtitleKey": "setting_item_app_not_working_desc",
+          "showSwitch": false
+        },
+        {
+          "id": "id_about",
+          "titleKey": "setting_about_title",
+          "subtitleKey": "setting_about_desc",
+          "showSwitch": false
+        }
+      ]
+    }
+  ]
+}

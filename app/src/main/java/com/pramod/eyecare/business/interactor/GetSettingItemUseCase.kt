@@ -1,17 +1,16 @@
 package com.pramod.eyecare.business.interactor
 
-import com.pramod.eyecare.business.SettingPreference
 import com.pramod.eyecare.business.domain.SettingGroup
-import com.pramod.eyecare.business.domain.SettingItem
-import com.pramod.eyecare.framework.ui.settings.SettingItemEnum
+import com.pramod.eyecare.framework.data.GetSettingEndpoint
 import javax.inject.Inject
 
 class GetSettingItemUseCase @Inject constructor(
-    private val settingPreference: SettingPreference
+    private val getSettingEndpoint: GetSettingEndpoint
 ) {
 
     suspend operator fun invoke(): List<SettingGroup> {
-        return listOf(
+        /*
+                return listOf(
             SettingGroup(
                 id = "id_auto",
                 title = "Auto",
@@ -57,6 +56,9 @@ class GetSettingItemUseCase @Inject constructor(
                 )
             )
         )
+
+         */
+        return getSettingEndpoint()
     }
 
 }

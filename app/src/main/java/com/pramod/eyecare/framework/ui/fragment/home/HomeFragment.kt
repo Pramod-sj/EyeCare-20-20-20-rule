@@ -9,6 +9,7 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -52,12 +53,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        applyInsets()
         setUpToolbar()
         checkServiceRunningState()
         bindServiceActiveState()
         handleStartStopFabClick()
         bindTimerData()
         bindTips()
+    }
+
+    private fun applyInsets() {
+        binding.fabStartService.doWithInset { view, top, bottom ->
+            binding.fabStartService.updateMargin(bottom = bottom + binding.fabStartService.marginBottom)
+        }
+        binding.fabStopService.doWithInset { view, top, bottom ->
+            binding.fabStopService.updateMargin(bottom = bottom + binding.fabStopService.marginBottom)
+        }
     }
 
     private fun setUpToolbar() {
@@ -95,8 +106,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     binding.inclWorking.tvMinRemaining.text = time.firstOrNull()
                     binding.inclWorking.tvSecRemaining.text = time.lastOrNull()
                     binding.inclWorking.progressTimeRemaining.setProgressCompat(
-                        100 - state.percentage,
-                        true
+                        100 - state.percentage, true
                     )
                 }
                 is EyeCareUiCountDownTimer.AlarmState.InProgressRest -> {
@@ -104,13 +114,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     binding.inclResting.root.isVisible = true
                     binding.inclResting.lottie.isVisible = true
                     binding.inclResting.progressGazePercentage.setProgressCompat(
-                        state.percentage,
-                        true
+                        state.percentage, true
                     )
                 }
             }
         }
     }
+
     private fun checkServiceRunningState() {
         viewModel.uiAlarmStateTimer.observe(viewLifecycleOwner) {
             viewModel.setIsServiceRunning(
@@ -139,8 +149,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun checkNotificationPermissionAndRequest(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.POST_NOTIFICATIONS
+                    requireContext(), Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 activityResultLauncher.launch(arrayOf(Manifest.permission.POST_NOTIFICATIONS))

@@ -3,6 +3,7 @@ package com.pramod.eyecare.framework.ui.settings
 import com.pramod.eyecare.business.SettingPreference
 import com.pramod.eyecare.business.domain.SettingGroup
 import com.pramod.eyecare.business.domain.SettingItem
+import com.pramod.eyecare.business.domain.SettingItemEnum
 import kotlinx.coroutines.flow.firstOrNull
 
 
@@ -14,7 +15,7 @@ suspend fun List<SettingGroup>.toUiStateList(settingPreference: SettingPreferenc
             settingItem = it.items.map { settingItem ->
                 SettingItemUiState(
                     settingItem = settingItem,
-                    isSwitchChecked = when (settingItem.id.toSettingItemEnum()) {
+                    isSwitchChecked = when (settingItem.id) {
                         SettingItemEnum.PLAY_WORK_RINGTONE -> settingPreference.getPlayWorkRingtone()
                             .firstOrNull() ?: false
                         else -> false
