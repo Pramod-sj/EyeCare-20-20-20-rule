@@ -1,4 +1,4 @@
-package com.pramod.eyecare.framework.data
+package com.pramod.eyecare.framework.datasource
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey

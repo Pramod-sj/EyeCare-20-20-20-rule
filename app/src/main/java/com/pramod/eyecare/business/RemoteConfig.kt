@@ -1,6 +1,6 @@
 package com.pramod.eyecare.business
 
-import com.pramod.eyecare.framework.data.model.SettingGroupEntity
+import com.pramod.eyecare.framework.datasource.model.SettingGroupEntity
 
 interface RemoteConfig {
 

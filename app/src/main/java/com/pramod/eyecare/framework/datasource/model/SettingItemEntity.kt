@@ -1,4 +1,4 @@
-package com.pramod.eyecare.framework.data.model
+package com.pramod.eyecare.framework.datasource.model
 
 data class SettingItemEntity(
     val id: String,

@@ -1,4 +1,4 @@
-package com.pramod.eyecare.framework.data
+package com.pramod.eyecare.framework.datasource
 
 import com.pramod.eyecare.business.CopyHelper
 import com.pramod.eyecare.business.RemoteConfig

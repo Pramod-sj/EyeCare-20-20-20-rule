@@ -2,9 +2,9 @@ package com.pramod.eyecare.framework.di
 
 import com.pramod.eyecare.business.*
 import com.pramod.eyecare.framework.impl.ScheduledAlarmCacheImpl
-import com.pramod.eyecare.framework.data.CopyHelperImpl
-import com.pramod.eyecare.framework.data.RemoteConfigImpl
-import com.pramod.eyecare.framework.data.SettingPreferenceImpl
+import com.pramod.eyecare.framework.datasource.CopyHelperImpl
+import com.pramod.eyecare.framework.datasource.RemoteConfigImpl
+import com.pramod.eyecare.framework.datasource.SettingPreferenceImpl
 import com.pramod.eyecare.framework.ui.EyeCareUiCountDownTimerImpl
 import dagger.Binds
 import dagger.Module
