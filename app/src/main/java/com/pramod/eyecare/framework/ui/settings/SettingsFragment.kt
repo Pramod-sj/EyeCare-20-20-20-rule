@@ -76,9 +76,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings),
             SettingItemEnum.RATE_APP -> {
 
             }
-            SettingItemEnum.SHARE_APP -> {
-
-            }
             SettingItemEnum.ABOUT_US -> {
                 findNavController().navigate(R.id.action_settingsFragment_to_aboutFragment)
             }

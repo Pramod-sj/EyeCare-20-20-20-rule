@@ -7,24 +7,27 @@ import androidx.recyclerview.widget.ListAdapter
 import com.pramod.eyecare.databinding.LayoutAboutAppInfoBinding
 import com.pramod.eyecare.databinding.LayoutAboutDeveloperInfoBinding
 import com.pramod.eyecare.databinding.LayoutSupportInfoBinding
+import com.pramod.eyecare.framework.datasource.model.about.AboutCardItem
+import com.pramod.eyecare.framework.datasource.model.about.AboutInnerItem
+import com.pramod.eyecare.framework.datasource.model.about.toAboutUiItemEnum
 import com.pramod.eyecare.framework.ui.fragment.about.viewholder.*
 
-val AboutUiItemComparator = object : DiffUtil.ItemCallback<AboutUiItem>() {
-    override fun areItemsTheSame(oldItem: AboutUiItem, newItem: AboutUiItem): Boolean {
+val AboutUiItemComparator = object : DiffUtil.ItemCallback<AboutCardItem>() {
+    override fun areItemsTheSame(oldItem: AboutCardItem, newItem: AboutCardItem): Boolean {
         return oldItem.hashCode() == newItem.hashCode()
     }
 
-    override fun areContentsTheSame(oldItem: AboutUiItem, newItem: AboutUiItem): Boolean {
+    override fun areContentsTheSame(oldItem: AboutCardItem, newItem: AboutCardItem): Boolean {
         return oldItem == newItem
     }
 
 }
 
 class AboutAdapter(private val listener: AboutItemListener) :
-    ListAdapter<AboutUiItem, AboutBaseViewHolder<AboutUiItem>>(AboutUiItemComparator) {
+    ListAdapter<AboutCardItem, AboutBaseViewHolder<AboutCardItem>>(AboutUiItemComparator) {
 
     interface AboutItemListener {
-        fun onItemClick(id: AboutInnerItemIdEnum, aboutInnerItem: AboutInnerItem)
+        fun onItemClick(id: AboutInnerItem.Enum, aboutInnerItem: AboutInnerItem)
         fun onDevFacebookClick(url: String)
         fun onDevInstagramClick(url: String)
         fun onDevGithubClick(url: String)
@@ -36,10 +39,10 @@ class AboutAdapter(private val listener: AboutItemListener) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): AboutBaseViewHolder<AboutUiItem> {
+    ): AboutBaseViewHolder<AboutCardItem> {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType.toAboutUiItemEnum()) {
-            AboutUiItem.Enum.APP -> {
+            AboutCardItem.Enum.APP -> {
                 AboutAppViewHolder(
                     binding = LayoutAboutAppInfoBinding.inflate(
                         /* inflater = */ layoutInflater,
@@ -48,16 +51,7 @@ class AboutAdapter(private val listener: AboutItemListener) :
                     )
                 )
             }
-            AboutUiItem.Enum.DEVELOPER -> {
-                DeveloperViewHolderAbout(
-                    binding = LayoutAboutDeveloperInfoBinding.inflate(
-                        /* inflater = */ layoutInflater,
-                        /* parent = */ parent,
-                        /* attachToParent = */ false
-                    )
-                )
-            }
-            AboutUiItem.Enum.SUPPORT -> {
+            AboutCardItem.Enum.SUPPORT -> {
                 SupportViewHolderAbout(
                     binding = LayoutSupportInfoBinding.inflate(
                         /* inflater = */ layoutInflater,
@@ -66,7 +60,7 @@ class AboutAdapter(private val listener: AboutItemListener) :
                     )
                 )
             }
-            AboutUiItem.Enum.CREDIT -> {
+            AboutCardItem.Enum.CREDIT -> {
                 CreditViewHolderAbout(
                     binding = LayoutSupportInfoBinding.inflate(
                         /* inflater = */ layoutInflater,
@@ -75,7 +69,7 @@ class AboutAdapter(private val listener: AboutItemListener) :
                     )
                 )
             }
-            AboutUiItem.Enum.OTHERS -> {
+            AboutCardItem.Enum.OTHERS -> {
                 OthersViewHolderAbout(
                     binding = LayoutSupportInfoBinding.inflate(
                         /* inflater = */ layoutInflater,
@@ -88,7 +82,7 @@ class AboutAdapter(private val listener: AboutItemListener) :
         }
     }
 
-    override fun onBindViewHolder(holder: AboutBaseViewHolder<AboutUiItem>, position: Int) {
+    override fun onBindViewHolder(holder: AboutBaseViewHolder<AboutCardItem>, position: Int) {
         holder.setListener(listener)
         holder.load(getItem(position))
     }

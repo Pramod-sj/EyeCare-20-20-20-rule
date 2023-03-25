@@ -6,7 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.pramod.eyecare.R
 import com.pramod.eyecare.business.domain.data.network.RemoteConfig
-import com.pramod.eyecare.framework.datasource.model.SettingGroupEntity
+import com.pramod.eyecare.framework.datasource.model.settings.SettingGroupEntity
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine

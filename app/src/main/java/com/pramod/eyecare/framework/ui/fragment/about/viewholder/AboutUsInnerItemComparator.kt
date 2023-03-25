@@ -1,7 +1,7 @@
 package com.pramod.eyecare.framework.ui.fragment.about.viewholder
 
 import androidx.recyclerview.widget.DiffUtil
-import com.pramod.eyecare.framework.ui.fragment.about.AboutInnerItem
+import com.pramod.eyecare.framework.datasource.model.about.AboutInnerItem
 
 val AboutUsInnerItemComparator = object : DiffUtil.ItemCallback<AboutInnerItem>() {
     override fun areItemsTheSame(oldItem: AboutInnerItem, newItem: AboutInnerItem): Boolean {
